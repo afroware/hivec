@@ -511,7 +511,12 @@ abstract class DbCore
             $sql .= ' ON DUPLICATE KEY UPDATE '.substr($duplicate_key_stringified, 0, -1);
         }
 
-        return (bool)$this->q($sql, $use_cache);
+        
+		if(!$this->q($sql, $use_cache)){
+			 throw new PrestaShopDatabaseException($sql);
+			 return false;
+		}
+        return true;
     }
 
     /**
@@ -556,8 +561,11 @@ abstract class DbCore
             $sql .= ' LIMIT '.(int)$limit;
         }
 
-        return (bool)$this->q($sql, $use_cache);
-    }
+        if(!$this->q($sql, $use_cache)){
+			 throw new PrestaShopDatabaseException($sql);
+			 return false;
+		}
+        return true;
 
     /**
      * Executes a DELETE query
@@ -577,12 +585,16 @@ abstract class DbCore
 
         $this->result = false;
         $sql = 'DELETE FROM `'.bqSQL($table).'`'.($where ? ' WHERE '.$where : '').($limit ? ' LIMIT '.(int)$limit : '');
-        $res = $this->query($sql);
+		
+		if(! $this->query($sql)){
+			 throw new PrestaShopDatabaseException($sql);
+			 return false;
+		}
         if ($use_cache && $this->is_cache_enabled) {
             Cache::getInstance()->deleteQuery($sql);
         }
-
-        return (bool)$res;
+		
+        return true;
     }
 
     /**
@@ -597,13 +609,16 @@ abstract class DbCore
         if ($sql instanceof DbQuery) {
             $sql = $sql->build();
         }
-
-        $this->result = $this->query($sql);
+		
+		if(! $this->query($sql)){
+			 throw new PrestaShopDatabaseException($sql);
+			 return false;
+		}
         if ($use_cache && $this->is_cache_enabled) {
             Cache::getInstance()->deleteQuery($sql);
         }
 
-        return (bool)$this->result;
+        return true;
     }
 
     /**
@@ -639,19 +654,21 @@ abstract class DbCore
             }
             return $this->execute($sql, $use_cache);
         }
+		
+		if(! $this->query($sql)){
+			 throw new PrestaShopDatabaseException($sql);
+			 return false;
+		}
 
-        $this->result = $this->query($sql);
+        $this->result = true ;
 
-        if (!$this->result) {
-            $result = false;
-        } else {
-            if (!$array) {
-                $use_cache = false;
-                $result = $this->result;
-            } else {
-                $result = $this->getAll($this->result);
-            }
-        }
+		if (!$array) {
+			$use_cache = false;
+			$result = $this->result;
+		} else {
+			$result = $this->getAll($this->result);
+		}
+
 
         $this->last_cached = false;
         if ($use_cache && $this->is_cache_enabled && $array) {
