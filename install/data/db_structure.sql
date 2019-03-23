@@ -37,8 +37,8 @@ CREATE TABLE `PREFIX_address` (
   `phone_mobile` varchar(32) DEFAULT NULL,
   `vat_number` varchar(32) DEFAULT NULL,
   `dni` varchar(16) DEFAULT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `active` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_address`),
@@ -185,8 +185,8 @@ CREATE TABLE `PREFIX_cart` (
   `gift_message` text,
   `mobile_theme` tinyint(1) NOT NULL DEFAULT '0',
   `allow_seperated_package` TINYINT(1) UNSIGNED NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_cart`),
   KEY `cart_customer` (`id_customer`),
   KEY `id_address_delivery` (`id_address_delivery`),
@@ -203,8 +203,8 @@ CREATE TABLE `PREFIX_cart` (
 CREATE TABLE `PREFIX_cart_rule` (
 	`id_cart_rule` int(10) unsigned NOT NULL auto_increment,
 	`id_customer` int unsigned NOT NULL DEFAULT '0',
-	`date_from` datetime NOT NULL,
-	`date_to` datetime NOT NULL,
+	`date_from` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+	`date_to` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 	`description` text,
 	`quantity` int(10) unsigned NOT NULL DEFAULT '0',
 	`quantity_per_user` int(10) unsigned NOT NULL DEFAULT '0',
@@ -231,8 +231,8 @@ CREATE TABLE `PREFIX_cart_rule` (
 	`gift_product_attribute` int(10) unsigned NOT NULL DEFAULT '0',
 	`highlight` tinyint(1) unsigned NOT NULL DEFAULT '0',
 	`active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-	`date_add` datetime NOT NULL,
-	`date_upd` datetime NOT NULL,
+	`date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+	`date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 	PRIMARY KEY (`id_cart_rule`),
 	KEY `id_customer` (`id_customer`, `active`, `date_to`),
 	KEY `group_restriction` (`group_restriction`, `active`, `date_to`),
@@ -313,7 +313,7 @@ CREATE TABLE `PREFIX_cart_product` (
   `id_shop` int(10) unsigned NOT NULL DEFAULT '1',
   `id_product_attribute` int(10) unsigned NOT NULL DEFAULT '1',
   `quantity` int(10) unsigned NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_cart`,`id_product`,`id_product_attribute`,`id_address_delivery`),
   KEY `id_product_attribute` (`id_product_attribute`),
   KEY `id_cart_order` (`id_cart`, `date_add`, `id_product`, `id_product_attribute`)
@@ -327,8 +327,8 @@ CREATE TABLE `PREFIX_category` (
   `nleft` int(10) unsigned NOT NULL DEFAULT '0',
   `nright` int(10) unsigned NOT NULL DEFAULT '0',
   `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `position` int(10) unsigned NOT NULL DEFAULT '0',
   `is_root_category` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_category`),
@@ -396,8 +396,8 @@ CREATE TABLE `PREFIX_cms_category` (
   `id_parent` int(10) unsigned NOT NULL,
   `level_depth` tinyint(3) unsigned NOT NULL DEFAULT '0',
   `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `position` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_cms_category`),
   KEY `category_parent` (`id_parent`)
@@ -433,8 +433,8 @@ CREATE TABLE `PREFIX_compare` (
 CREATE TABLE `PREFIX_compare_product` (
   `id_compare` int(10) unsigned NOT NULL,
   `id_product` int(10) unsigned NOT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_compare`,`id_product`)
 ) ;
 
@@ -444,8 +444,8 @@ CREATE TABLE `PREFIX_configuration` (
   `id_shop` INT(11) UNSIGNED DEFAULT NULL,
   `name` varchar(254) NOT NULL,
   `value` text,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_configuration`),
   KEY `name` (`name`),
   KEY `id_shop` (`id_shop`),
@@ -466,8 +466,8 @@ CREATE TABLE `PREFIX_configuration_kpi` (
   `id_shop` INT(11) UNSIGNED DEFAULT NULL,
   `name` varchar(64) NOT NULL,
   `value` text,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_configuration_kpi`),
   KEY `name` (`name`),
   KEY `id_shop` (`id_shop`),
@@ -489,7 +489,7 @@ CREATE TABLE `PREFIX_connections` (
   `id_guest` int(10) unsigned NOT NULL,
   `id_page` int(10) unsigned NOT NULL,
   `ip_address` BIGINT NULL DEFAULT NULL,
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `http_referer` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_connections`),
   KEY `id_guest` (`id_guest`),
@@ -500,7 +500,7 @@ CREATE TABLE `PREFIX_connections` (
 CREATE TABLE `PREFIX_connections_page` (
   `id_connections` int(10) unsigned NOT NULL,
   `id_page` int(10) unsigned NOT NULL,
-  `time_start` datetime NOT NULL,
+  `time_start` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `time_end` datetime DEFAULT NULL,
   PRIMARY KEY (`id_connections`,`id_page`,`time_start`)
 ) ;
@@ -511,7 +511,7 @@ CREATE TABLE `PREFIX_connections_source` (
   `http_referer` varchar(255) DEFAULT NULL,
   `request_uri` varchar(255) DEFAULT NULL,
   `keywords` varchar(255) DEFAULT NULL,
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_connections_source`),
   KEY `connections` (`id_connections`),
   KEY `orderby` (`date_add`),
@@ -604,8 +604,8 @@ CREATE TABLE `PREFIX_customer` (
   `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
   `is_guest` tinyint(1) NOT NULL DEFAULT '0',
   `deleted` tinyint(1) NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_customer`),
   KEY `customer_email` (`email`),
   KEY `customer_login` (`email`,`passwd`),
@@ -631,8 +631,8 @@ CREATE TABLE `PREFIX_customer_message` (
   `file_name` varchar(18) DEFAULT NULL,
   `ip_address`  varchar(16) DEFAULT NULL,
   `user_agent` varchar(128) DEFAULT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `private` TINYINT NOT NULL DEFAULT  '0',
   `read` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_customer_message`),
@@ -657,8 +657,8 @@ CREATE TABLE `PREFIX_customer_thread` (
   `status` enum('open','closed','pending1','pending2') NOT NULL DEFAULT 'open',
   `email` varchar(128) NOT NULL,
   `token` varchar(12) DEFAULT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 	PRIMARY KEY (`id_customer_thread`),
 	KEY `id_shop` (`id_shop`),
 	KEY `id_lang` (`id_lang`),
@@ -711,8 +711,8 @@ CREATE TABLE `PREFIX_customized_data` (
 
 CREATE TABLE `PREFIX_date_range` (
   `id_date_range` int(10) unsigned NOT NULL auto_increment,
-  `time_start` datetime NOT NULL,
-  `time_end` datetime NOT NULL,
+  `time_start` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `time_end` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_date_range`)
 ) ;
 
@@ -829,8 +829,8 @@ CREATE TABLE `PREFIX_group` (
   `reduction` decimal(17,2) NOT NULL DEFAULT '0.00',
   `price_display_method` TINYINT NOT NULL DEFAULT '0',
   `show_prices` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_group`)
 ) ;
 
@@ -978,8 +978,8 @@ CREATE TABLE `PREFIX_lang` (
 CREATE TABLE `PREFIX_manufacturer` (
   `id_manufacturer` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(64) NOT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_manufacturer`)
 ) ;
@@ -1003,7 +1003,7 @@ CREATE TABLE `PREFIX_message` (
   `id_order` int(10) unsigned NOT NULL,
   `message` text NOT NULL,
   `private` tinyint(1) unsigned NOT NULL DEFAULT '1',
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_message`),
   KEY `message_order` (`id_order`),
   KEY `id_cart` (`id_cart`),
@@ -1014,7 +1014,7 @@ CREATE TABLE `PREFIX_message` (
 CREATE TABLE `PREFIX_message_readed` (
   `id_message` int(10) unsigned NOT NULL,
   `id_employee` int(10) unsigned NOT NULL,
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_message`,`id_employee`)
 ) ;
 
@@ -1127,12 +1127,12 @@ CREATE TABLE `PREFIX_orders` (
   `round_type` tinyint(1) NOT NULL DEFAULT '1',
   `invoice_number` int(10) unsigned NOT NULL DEFAULT '0',
   `delivery_number` int(10) unsigned NOT NULL DEFAULT '0',
-  `invoice_date` datetime NOT NULL,
-  `delivery_date` datetime NOT NULL,
+  `invoice_date` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `delivery_date` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `source` varchar(255) DEFAULT NULL,
   `valid` int(1) unsigned NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_order`),
   KEY `reference` (`reference`),
   KEY `id_customer` (`id_customer`),
@@ -1179,7 +1179,7 @@ CREATE TABLE `PREFIX_order_invoice` (
   `invoice_address` text DEFAULT NULL,
   `delivery_address` text DEFAULT NULL,
   `note` text,
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_order_invoice`),
   KEY `id_order` (`id_order`)
 ) ;
@@ -1264,7 +1264,7 @@ CREATE TABLE `PREFIX_order_history` (
   `id_employee` int(10) unsigned NOT NULL,
   `id_order` int(10) unsigned NOT NULL,
   `id_order_state` int(10) unsigned NOT NULL,
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_order_history`),
   KEY `order_history_order` (`id_order`),
   KEY `id_employee` (`id_employee`),
@@ -1273,7 +1273,7 @@ CREATE TABLE `PREFIX_order_history` (
 
 CREATE TABLE `PREFIX_order_message` (
   `id_order_message` int(10) unsigned NOT NULL auto_increment,
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_order_message`)
 ) ;
 
@@ -1291,8 +1291,8 @@ CREATE TABLE `PREFIX_order_return` (
   `id_order` int(10) unsigned NOT NULL,
   `state` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `question` text NOT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_order_return`),
   KEY `order_return_customer` (`id_customer`),
   KEY `id_order` (`id_order`)
@@ -1334,8 +1334,8 @@ CREATE TABLE `PREFIX_order_slip` (
   `shipping_cost_amount` DECIMAL(10,2) NOT NULL,
   `partial` TINYINT(1) NOT NULL,
   `order_slip_type` TINYINT(1) unsigned NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_order_slip`),
   KEY `order_slip_customer` (`id_customer`),
   KEY `id_order` (`id_order`)
@@ -1427,7 +1427,7 @@ CREATE TABLE `PREFIX_order_payment` (
 	`card_brand` VARCHAR(254) NULL,
 	`card_expiration` CHAR(7) NULL,
 	`card_holder` VARCHAR(254) NULL,
-	`date_add` DATETIME NOT NULL,
+	`date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 	PRIMARY KEY (`id_order_payment`),
 	KEY `order_reference`(`order_reference`)
 ) ;
@@ -1476,8 +1476,8 @@ CREATE TABLE `PREFIX_product` (
   `cache_has_attachments` tinyint(1) NOT NULL DEFAULT '0',
   `is_virtual` tinyint(1) NOT NULL DEFAULT '0',
   `cache_default_attribute` int(10) unsigned DEFAULT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `advanced_stock_management` tinyint(1) DEFAULT '0' NOT NULL,
   `pack_stock_type` int(11) unsigned DEFAULT '3' NOT NULL,
   PRIMARY KEY (`id_product`),
@@ -1516,8 +1516,8 @@ CREATE TABLE IF NOT EXISTS `PREFIX_product_shop` (
   `visibility` enum('both','catalog','search','none') NOT NULL DEFAULT 'both',
   `cache_default_attribute` int(10) unsigned DEFAULT NULL,
   `advanced_stock_management` tinyint(1) DEFAULT '0' NOT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `pack_stock_type` int(11) unsigned DEFAULT '3' NOT NULL,
   PRIMARY KEY (`id_product`, `id_shop`),
   KEY `id_category_default` (`id_category_default`),
@@ -1585,7 +1585,7 @@ CREATE TABLE `PREFIX_product_download` (
   `id_product` int(10) unsigned NOT NULL,
   `display_filename` varchar(255) DEFAULT NULL,
   `filename` varchar(255) DEFAULT NULL,
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `date_expiration` datetime DEFAULT NULL,
   `nb_days_accessible` int(10) unsigned DEFAULT NULL,
   `nb_downloadable` int(10) unsigned DEFAULT '1',
@@ -1618,7 +1618,7 @@ CREATE TABLE `PREFIX_product_sale` (
   `id_product` int(10) unsigned NOT NULL,
   `quantity` int(10) unsigned NOT NULL DEFAULT '0',
   `sale_nbr` int(10) unsigned NOT NULL DEFAULT '0',
-  `date_upd` date NOT NULL,
+  `date_upd` date NOT NULL DEFAULT '1970-01-01',
   PRIMARY KEY (`id_product`),
   KEY `quantity` (`quantity`)
 ) ;
@@ -1691,7 +1691,7 @@ CREATE TABLE `PREFIX_referrer` (
   `base_fee` decimal(5,2) NOT NULL DEFAULT '0.00',
   `percent_fee` decimal(5,2) NOT NULL DEFAULT '0.00',
   `click_fee` decimal(5,2) NOT NULL DEFAULT '0.00',
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_referrer`)
 ) ;
 
@@ -1791,8 +1791,8 @@ CREATE TABLE `PREFIX_specific_price` (
  	`reduction` DECIMAL(20, 6) NOT NULL,
  	`reduction_tax` tinyint(1) NOT NULL DEFAULT 1,
 	`reduction_type` ENUM('amount', 'percentage') NOT NULL,
-	`from` DATETIME NOT NULL,
-	`to` DATETIME NOT NULL,
+	`from` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+	`to` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 	PRIMARY KEY (`id_specific_price`),
 	KEY (`id_product`, `id_shop`, `id_currency`, `id_country`, `id_group`, `id_customer`, `from_quantity`, `from`, `to`),
 	KEY `from_quantity` (`from_quantity`),
@@ -1819,8 +1819,8 @@ CREATE TABLE `PREFIX_state` (
 CREATE TABLE `PREFIX_supplier` (
   `id_supplier` int(10) unsigned NOT NULL auto_increment,
   `name` varchar(64) NOT NULL,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `active` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_supplier`)
 ) ;
@@ -1931,8 +1931,8 @@ CREATE TABLE `PREFIX_store` (
   `email` varchar(128) DEFAULT NULL,
   `note` text,
   `active` tinyint(1) unsigned NOT NULL DEFAULT '0',
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_store`)
 ) ;
 
@@ -2003,8 +2003,8 @@ CREATE TABLE `PREFIX_tax_rules_group` (
 `name` VARCHAR( 50 ) NOT NULL,
 `active` INT NOT NULL,
 `deleted` TINYINT(1) UNSIGNED NOT NULL,
-`date_add` DATETIME NOT NULL,
-`date_upd` DATETIME NOT NULL
+`date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+`date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00'
 ) ;
 
 CREATE TABLE `PREFIX_specific_price_priority` (
@@ -2023,8 +2023,8 @@ CREATE TABLE `PREFIX_log` (
 	`object_type` varchar(32) DEFAULT NULL,
 	`object_id` int(10) unsigned DEFAULT NULL,
 	`id_employee` int(10) unsigned DEFAULT NULL,
-	`date_add` datetime NOT NULL,
-	`date_upd` datetime NOT NULL,
+	`date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+	`date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 	PRIMARY KEY (`id_log`)
 ) ;
 
@@ -2262,7 +2262,7 @@ CREATE TABLE `PREFIX_stock_mvt` (
   `employee_lastname` varchar(32) DEFAULT '',
   `employee_firstname` varchar(32) DEFAULT '',
   `physical_quantity` INT(11) UNSIGNED NOT NULL,
-  `date_add` DATETIME NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `sign` tinyint(1) NOT NULL DEFAULT 1,
   `price_te` DECIMAL(20,6) DEFAULT '0.000000',
   `last_wa` DECIMAL(20,6) DEFAULT '0.000000',
@@ -2276,8 +2276,8 @@ CREATE TABLE `PREFIX_stock_mvt` (
 CREATE TABLE `PREFIX_stock_mvt_reason` (
   `id_stock_mvt_reason` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `sign` tinyint(1) NOT NULL DEFAULT 1,
-  `date_add` datetime NOT NULL,
-  `date_upd` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+  `date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   `deleted` tinyint(1) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id_stock_mvt_reason`)
 ) ;
@@ -2371,8 +2371,8 @@ CREATE TABLE `PREFIX_supply_order` (
 `id_currency` INT(11) UNSIGNED NOT NULL,
 `id_ref_currency` INT(11) UNSIGNED NOT NULL,
 `reference` VARCHAR(64) NOT NULL,
-`date_add` DATETIME NOT NULL,
-`date_upd` DATETIME NOT NULL,
+`date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+`date_upd` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 `date_delivery_expected` DATETIME DEFAULT NULL,
 `total_te` DECIMAL(20,6) DEFAULT '0.000000',
 `total_with_discount_te` DECIMAL(20,6) DEFAULT '0.000000',
@@ -2424,7 +2424,7 @@ CREATE TABLE `PREFIX_supply_order_history` (
 `employee_lastname` varchar(32) DEFAULT '',
 `employee_firstname` varchar(32) DEFAULT '',
 `id_state` INT(11) UNSIGNED NOT NULL,
-`date_add` DATETIME NOT NULL,
+`date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_supply_order_history`),
   KEY `id_supply_order` (`id_supply_order`),
   KEY `id_employee` (`id_employee`),
@@ -2457,7 +2457,7 @@ CREATE TABLE `PREFIX_supply_order_receipt_history` (
 `employee_firstname` varchar(32) DEFAULT '',
 `id_supply_order_state` INT(11) UNSIGNED NOT NULL,
 `quantity` INT(11) UNSIGNED NOT NULL,
-`date_add` DATETIME NOT NULL,
+`date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_supply_order_receipt_history`),
   KEY `id_supply_order_detail` (`id_supply_order_detail`),
   KEY `id_supply_order_state` (`id_supply_order_state`)
@@ -2485,7 +2485,7 @@ CREATE TABLE `PREFIX_order_carrier` (
   `shipping_cost_tax_excl` decimal(20,6) DEFAULT NULL,
   `shipping_cost_tax_incl` decimal(20,6) DEFAULT NULL,
   `tracking_number` varchar(64) DEFAULT NULL,
-  `date_add` datetime NOT NULL,
+  `date_add` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`id_order_carrier`),
   KEY `id_order` (`id_order`),
   KEY `id_carrier` (`id_carrier`),
@@ -2504,8 +2504,8 @@ CREATE TABLE IF NOT EXISTS `PREFIX_specific_price_rule` (
 	`reduction` decimal(20,6) NOT NULL,
  	`reduction_tax` tinyint(1) NOT NULL DEFAULT 1,
 	`reduction_type` enum('amount','percentage') NOT NULL,
-	`from` datetime NOT NULL,
-	`to` datetime NOT NULL,
+	`from` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
+	`to` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
 	PRIMARY KEY (`id_specific_price_rule`),
 	KEY `id_product` (`id_shop`,`id_currency`,`id_country`,`id_group`,`from_quantity`,`from`,`to`)
 ) ;
