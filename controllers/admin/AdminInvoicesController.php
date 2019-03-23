@@ -58,7 +58,7 @@ class AdminInvoicesControllerCore extends AdminController
                     ),
                     'PS_INVOICE_PREFIX' => array(
                         'title' => $this->l('Invoice prefix'),
-                        'desc' => $this->l('Prefix used for invoice name (e.g. #IN00001).'),
+                        'desc' => $this->l('Prefix used for invoice name (e.g. #IN19701).'),
                         'size' => 6,
                         'type' => 'textLang'
                     ),

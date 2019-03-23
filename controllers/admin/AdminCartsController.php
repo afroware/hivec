@@ -888,8 +888,8 @@ class AdminCartsControllerCore extends AdminController
 			$specific_price->from_quantity = 1;
 			$specific_price->reduction = 0;
 			$specific_price->reduction_type = 'amount';
-			$specific_price->from = '0000-00-00 00:00:00';
-			$specific_price->to = '0000-00-00 00:00:00';
+			$specific_price->from = '1970-01-01 00:00:00';
+			$specific_price->to = '1970-01-01 00:00:00';
 			$specific_price->add();
 			echo Tools::jsonEncode($this->ajaxReturnVars());
 		}

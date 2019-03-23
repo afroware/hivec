@@ -64,7 +64,7 @@ class AdminReturnControllerCore extends AdminController
                         'size' => '2'),
                     'PS_RETURN_PREFIX' => array(
                         'title' => $this->l('Returns prefix'),
-                        'desc' => $this->l('Prefix used for return name (e.g. RE00001).'),
+                        'desc' => $this->l('Prefix used for return name (e.g. RE19701).'),
                         'size' => 6,
                         'type' => 'textLang'
                     ),

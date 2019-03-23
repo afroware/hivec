@@ -67,7 +67,7 @@ class AdminAttributeGeneratorControllerCore extends AdminController
                 'quantity' => (int)Tools::getValue('quantity'),
                 'reference' => pSQL($_POST['reference']),
                 'default_on' => 0,
-                'available_date' => '0000-00-00'
+                'available_date' => '1970-01-01'
             );
         }
         return array();
@@ -76,7 +76,12 @@ class AdminAttributeGeneratorControllerCore extends AdminController
     protected static function createCombinations($list)
     {
         if (count($list) <= 1) {
-            return count($list) ? array_map(create_function('$v', 'return (array($v));'), $list[0]) : $list;
+			
+			$callback= function($v){
+				return (array($v));
+			};
+			
+            return count($list) ? array_map($callback, $list[0]) : $list;
         }
         $res = array();
         $first = array_pop($list);

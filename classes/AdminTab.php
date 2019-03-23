@@ -1669,7 +1669,11 @@ abstract class AdminTabCore
 
         $irow = 0;
         if ($this->_list && isset($this->fieldsDisplay['position'])) {
-            $positions = array_map(create_function('$elem', 'return (int)$elem[\'position\'];'), $this->_list);
+			
+			$callback= function($elem){
+				return (int)$elem['position'];
+			};
+            $positions = array_map($callback, $this->_list);
             sort($positions);
         }
         if ($this->_list) {
@@ -2413,8 +2417,8 @@ abstract class AdminTabCore
     protected function warnDomainName()
     {
         if ($_SERVER['HTTP_HOST'] != Configuration::get('PS_SHOP_DOMAIN') && $_SERVER['HTTP_HOST'] != Configuration::get('PS_SHOP_DOMAIN_SSL') && !defined('_PS_HOST_MODE_')) {
-            $this->displayWarning($this->l('You are currently connected with the following domain name:').' <span style="color: #CC0000;">'.$_SERVER['HTTP_HOST'].'</span><br />'.
-            $this->l('This one is different from the main shop\'s domain name set in "Preferences > SEO & URLs":').' <span style="color: #CC0000;">'.Configuration::get('PS_SHOP_DOMAIN').'</span><br />
+            $this->displayWarning($this->l('You are currently connected with the following domain name:').' <span style="color: #CC1970;">'.$_SERVER['HTTP_HOST'].'</span><br />'.
+            $this->l('This one is different from the main shop\'s domain name set in "Preferences > SEO & URLs":').' <span style="color: #CC1970;">'.Configuration::get('PS_SHOP_DOMAIN').'</span><br />
 			<a href="index.php?tab=AdminMeta&token='.Tools::getAdminTokenLite('AdminMeta').'#SEO%20%26%20URLs">'.
             $this->l('Click here if you want to modify the main shop\'s domain name').'</a>');
         }

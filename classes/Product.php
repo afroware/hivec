@@ -176,7 +176,7 @@ class ProductCore extends ObjectModel
     public $available_for_order = true;
 
     /** @var string Object available order date */
-    public $available_date = '0000-00-00';
+    public $available_date = '1970-01-01';
 
     /** @var string Enumerated (enum) product condition (new, used, refurbished) */
     public $condition;
@@ -760,7 +760,7 @@ class ProductCore extends ObjectModel
         return $result;
     }
 
-    public function setAvailableDate($available_date = '0000-00-00')
+    public function setAvailableDate($available_date = '1970-01-01')
     {
         if (Validate::isDateFormat($available_date) && $this->available_date != $available_date) {
             $this->available_date = $available_date;
@@ -783,7 +783,7 @@ class ProductCore extends ObjectModel
         if ($id_product_attribute === null) {
             $sql .= ' p.`available_date`';
         } else {
-            $sql .= ' IF(pa.`available_date` = "0000-00-00", p.`available_date`, pa.`available_date`) AS available_date';
+            $sql .= ' IF(pa.`available_date` = "1970-01-01", p.`available_date`, pa.`available_date`) AS available_date';
         }
 
         $sql .= ' FROM `'._DB_PREFIX_.'product` p';
@@ -806,7 +806,7 @@ class ProductCore extends ObjectModel
 
         $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getValue($sql);
 
-        if ($result == '0000-00-00') {
+        if ($result == '1970-01-01') {
             $result = null;
         }
 
@@ -1338,7 +1338,7 @@ class ProductCore extends ObjectModel
 
             if ($id_combination) {
                 $obj->minimal_quantity = 1;
-                $obj->available_date = '0000-00-00';
+                $obj->available_date = '1970-01-01';
             }
 
             foreach ($combination as $field => $value) {
@@ -1574,7 +1574,7 @@ class ProductCore extends ObjectModel
         $combination->upc = pSQL($upc);
         $combination->default_on = (int)$default;
         $combination->minimal_quantity = (int)$minimal_quantity;
-        $combination->available_date = $available_date ? pSQL($available_date) : '0000-00-00';
+        $combination->available_date = $available_date ? pSQL($available_date) : '1970-01-01';
 
         if (count($id_shop_list)) {
             $combination->id_shop_list = $id_shop_list;

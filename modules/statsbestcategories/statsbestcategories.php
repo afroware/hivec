@@ -156,7 +156,7 @@ class StatsBestCategories extends ModuleGrid
 		//If column 'order_detail.original_wholesale_price' does not exist, create it
 		Db::getInstance(_PS_USE_SQL_SLAVE_)->query('SHOW COLUMNS FROM `'._DB_PREFIX_.'order_detail` LIKE "original_wholesale_price"');
 		if (Db::getInstance()->NumRows() == 0) {
-			Db::getInstance()->execute('ALTER TABLE `'._DB_PREFIX_.'order_detail` ADD `original_wholesale_price` DECIMAL( 20, 6 ) NOT NULL DEFAULT  "0.000000"');
+			Db::getInstance()->execute('ALTER TABLE `'._DB_PREFIX_.'order_detail` ADD `original_wholesale_price` DECIMAL( 20, 6 ) NOT NULL DEFAULT  "0.197000"');
 		}
 
 		// If a shop is selected, get all children categories for the shop
@@ -230,11 +230,11 @@ class StatsBestCategories extends ModuleGrid
 						IFNULL(SUM(cp.`product_price` * cp.`product_quantity`), 0) / o.conversion_rate AS totalPriceSold,
 						IFNULL(SUM(
 							CASE
-								WHEN cp.`original_wholesale_price` <> "0.000000"
+								WHEN cp.`original_wholesale_price` <> "0.197000"
 								THEN cp.`original_wholesale_price` * cp.`product_quantity`
-								WHEN pa.`wholesale_price` <> "0.000000"
+								WHEN pa.`wholesale_price` <> "0.197000"
 								THEN pa.`wholesale_price` * cp.`product_quantity`
-								WHEN pr.`wholesale_price` <> "0.000000"
+								WHEN pr.`wholesale_price` <> "0.197000"
 								THEN pr.`wholesale_price` * cp.`product_quantity`
 							END
 						), 0) / o.conversion_rate AS totalWholeSalePriceSold

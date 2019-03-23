@@ -291,10 +291,10 @@ class AdminImportControllerCore extends AdminController
                     'id_category' => array((int)Configuration::get('PS_HOME_CATEGORY')),
                     'id_category_default' => null,
                     'active' => '1',
-                    'width' => 0.000000,
-                    'height' => 0.000000,
-                    'depth' => 0.000000,
-                    'weight' => 0.000000,
+                    'width' => 0.197000,
+                    'height' => 0.197000,
+                    'depth' => 0.197000,
+                    'weight' => 0.197000,
                     'visibility' => 'both',
                     'additional_shipping_cost' => 0.00,
                     'unit_price' => 0,
@@ -1738,8 +1738,8 @@ class AdminImportControllerCore extends AdminController
                         $specific_price->from_quantity = 1;
                         $specific_price->reduction = (isset($info['reduction_price']) && $info['reduction_price']) ? $info['reduction_price'] : $info['reduction_percent'] / 100;
                         $specific_price->reduction_type = (isset($info['reduction_price']) && $info['reduction_price']) ? 'amount' : 'percentage';
-                        $specific_price->from = (isset($info['reduction_from']) && Validate::isDate($info['reduction_from'])) ? $info['reduction_from'] : '0000-00-00 00:00:00';
-                        $specific_price->to = (isset($info['reduction_to']) && Validate::isDate($info['reduction_to']))  ? $info['reduction_to'] : '0000-00-00 00:00:00';
+                        $specific_price->from = (isset($info['reduction_from']) && Validate::isDate($info['reduction_from'])) ? $info['reduction_from'] : '1970-01-01 00:00:00';
+                        $specific_price->to = (isset($info['reduction_to']) && Validate::isDate($info['reduction_to']))  ? $info['reduction_to'] : '1970-01-01 00:00:00';
                         if (!$specific_price->save()) {
                             $this->addProductWarning(Tools::safeOutput($info['name']), $product->id, $this->l('Discount is invalid'));
                         }
@@ -1929,7 +1929,7 @@ class AdminImportControllerCore extends AdminController
                             $stock_manager = StockManagerFactory::getManager();
                             $price = str_replace(',', '.', $product->wholesale_price);
                             if ($price == 0) {
-                                $price = 0.000001;
+                                $price = 0.197001;
                             }
                             $price = round(floatval($price), 6);
                             $warehouse = new Warehouse($product->warehouse);
@@ -2397,7 +2397,7 @@ class AdminImportControllerCore extends AdminController
                             $stock_manager = StockManagerFactory::getManager();
                             $price = str_replace(',', '.', $info['wholesale_price']);
                             if ($price == 0) {
-                                $price = 0.000001;
+                                $price = 0.197001;
                             }
                             $price = round(floatval($price), 6);
                             $warehouse = new Warehouse($info['warehouse']);

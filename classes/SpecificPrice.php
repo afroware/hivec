@@ -223,9 +223,9 @@ class SpecificPriceCore extends ObjectModel
 				AND `id_customer` IN (0, '.(int)$id_customer.')
 				AND
 				(
-					(`from` = \'0000-00-00 00:00:00\' OR \''.$now.'\' >= `from`)
+					(`from` = \'1970-01-01 00:00:00\' OR \''.$now.'\' >= `from`)
 					AND
-					(`to` = \'0000-00-00 00:00:00\' OR \''.$now.'\' <= `to`)
+					(`to` = \'1970-01-01 00:00:00\' OR \''.$now.'\' <= `to`)
 				)
 				AND id_cart IN (0, '.(int)$id_cart.')
 				AND IF(`from_quantity` > 1, `from_quantity`, 0) <= ';
@@ -294,9 +294,9 @@ class SpecificPriceCore extends ObjectModel
 					`id_customer` IN(0, '.(int)$id_customer.')
 					AND
 					(
-						(`from` = \'0000-00-00 00:00:00\' OR \''.$now.'\' >= `from`)
+						(`from` = \'1970-01-01 00:00:00\' OR \''.$now.'\' >= `from`)
 						AND
-						(`to` = \'0000-00-00 00:00:00\' OR \''.$now.'\' <= `to`)
+						(`to` = \'1970-01-01 00:00:00\' OR \''.$now.'\' <= `to`)
 					)
 					ORDER BY `from_quantity` ASC, `id_specific_price_rule` ASC, `score` DESC, `to` DESC, `from` DESC
 		', false, false);
@@ -342,9 +342,9 @@ class SpecificPriceCore extends ObjectModel
 					`from_quantity` >= '.(int)$quantity.'
 					AND
 					(
-						(`from` = \'0000-00-00 00:00:00\' OR \''.$now.'\' >= `from`)
+						(`from` = \'1970-01-01 00:00:00\' OR \''.$now.'\' >= `from`)
 						AND
-						(`to` = \'0000-00-00 00:00:00\' OR \''.$now.'\' <= `to`)
+						(`to` = \'1970-01-01 00:00:00\' OR \''.$now.'\' <= `to`)
 					)
 					ORDER BY `from_quantity` DESC, `score` DESC, `to` DESC, `from` DESC
 		');
@@ -366,9 +366,9 @@ class SpecificPriceCore extends ObjectModel
 					`id_customer` IN(0, '.(int)$id_customer.') AND
 					`from_quantity` = 1 AND
 					(
-						(`from` = \'0000-00-00 00:00:00\' OR \''.pSQL($beginning).'\' >= `from`)
+						(`from` = \'1970-01-01 00:00:00\' OR \''.pSQL($beginning).'\' >= `from`)
 						AND
-						(`to` = \'0000-00-00 00:00:00\' OR \''.pSQL($ending).'\' <= `to`)
+						(`to` = \'1970-01-01 00:00:00\' OR \''.pSQL($ending).'\' <= `to`)
 					)
 					AND
 					`reduction` > 0

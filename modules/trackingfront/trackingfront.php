@@ -53,11 +53,11 @@ class TrackingFront extends Module
 			$fake_employee->stats_date_from = $this->context->cookie->stats_date_from;
 			$fake_employee->stats_date_to = $this->context->cookie->stats_date_to;
 			
-			if (empty($fake_employee->stats_date_from) || empty($fake_employee->stats_date_to) || $fake_employee->stats_date_from == '0000-00-00' || $fake_employee->stats_date_to == '0000-00-00')
+			if (empty($fake_employee->stats_date_from) || empty($fake_employee->stats_date_to) || $fake_employee->stats_date_from == '1970-01-01' || $fake_employee->stats_date_to == '1970-01-01')
 			{
-				if (empty($fake_employee->stats_date_from) || $fake_employee->stats_date_from == '0000-00-00')
+				if (empty($fake_employee->stats_date_from) || $fake_employee->stats_date_from == '1970-01-01')
 					$fake_employee->stats_date_from = date('Y').'-01-01';
-				if (empty($fake_employee->stats_date_to) || $fake_employee->stats_date_to == '0000-00-00')
+				if (empty($fake_employee->stats_date_to) || $fake_employee->stats_date_to == '1970-01-01')
 					$fake_employee->stats_date_to = date('Y').'-12-31';
 			}
 

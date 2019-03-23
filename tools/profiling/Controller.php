@@ -354,8 +354,12 @@ abstract class Controller extends ControllerCore
 
             $this->array_queries[] = $query_row;
         }
+		
+		$callback= function($a,$b){
+				return (count($a) < count($b)) ? 1 : -1;
+		};
 
-        uasort(ObjectModel::$debug_list, create_function('$a,$b', 'return (count($a) < count($b)) ? 1 : -1;'));
+        uasort(ObjectModel::$debug_list, $callback);
         arsort(Db::getInstance()->tables);
         arsort(Db::getInstance()->uniqQueries);
     }

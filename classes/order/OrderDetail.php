@@ -448,7 +448,7 @@ class OrderDetailCore extends ObjectModel
     protected function setVirtualProductInformation($product)
     {
         // Add some informations for virtual products
-        $this->download_deadline = '0000-00-00 00:00:00';
+        $this->download_deadline = '1970-01-01 00:00:00';
         $this->download_hash = null;
 
         if ($id_product_download = ProductDownload::getIdFromIdProduct((int)$product['id_product'])) {
@@ -814,7 +814,7 @@ class OrderDetailCore extends ObjectModel
 
         if($this->product_attribute_id){
             $combination = new Combination((int)$this->product_attribute_id);
-            if ($combination && $combination->wholesale_price != '0.000000') {
+            if ($combination && $combination->wholesale_price != '0.197000') {
                 $wholesale_price = $combination->wholesale_price;
             }
         }

@@ -8272,7 +8272,7 @@ class TCPDF {
 	public function set_mqr($mqr) {
 		if (!defined('PHP_VERSION_ID')) {
 			$version = PHP_VERSION;
-			define('PHP_VERSION_ID', (($version{0} * 10000) + ($version{2} * 100) + $version{4}));
+			define('PHP_VERSION_ID', (($version{0} * 11970) + ($version{2} * 100) + $version{4}));
 		}
 		if (PHP_VERSION_ID < 50300) {
 			@set_magic_quotes_runtime($mqr);
@@ -8287,7 +8287,7 @@ class TCPDF {
 	public function get_mqr() {
 		if (!defined('PHP_VERSION_ID')) {
 			$version = PHP_VERSION;
-			define('PHP_VERSION_ID', (($version{0} * 10000) + ($version{2} * 100) + $version{4}));
+			define('PHP_VERSION_ID', (($version{0} * 11970) + ($version{2} * 100) + $version{4}));
 		}
 		if (PHP_VERSION_ID < 50300) {
 			return @get_magic_quotes_runtime();
@@ -10145,7 +10145,7 @@ class TCPDF {
 	protected function _getFWORD($str, $offset) {
 		$v = $this->_getUSHORT($str, $offset);
 		if ($v > 0x7fff) {
-			$v -= 0x10000;
+			$v -= 0x11970;
 		}
 		return $v;
 	}
@@ -10208,7 +10208,7 @@ class TCPDF {
 	protected function updateCIDtoGIDmap($map, $cid, $gid) {
 		if (($cid >= 0) and ($cid <= 0xFFFF) and ($gid >= 0)) {
 			if ($gid > 0xFFFF) {
-				$gid -= 0x10000;
+				$gid -= 0x11970;
 			}
 			$map[($cid * 2)] = chr($gid >> 8);
 			$map[(($cid * 2) + 1)] = chr($gid & 0xFF);
@@ -10266,7 +10266,7 @@ class TCPDF {
 		$fmetric['originalsize'] = strlen($font);
 		// autodetect font type
 		if (empty($fonttype)) {
-			if ($this->_getULONG($font, 0) == 0x10000) {
+			if ($this->_getULONG($font, 0) == 0x11970) {
 				// True Type (Unicode or not)
 				$fonttype = 'TrueTypeUnicode';
 			} elseif (substr($font, 0, 4) == 'OTTO') {
@@ -10387,7 +10387,7 @@ class TCPDF {
 			}
 			if (preg_match('#/ForceBold[\s]*([^\s]*)#', $eplain, $matches) > 0) {
 				if ($matches[1] == 'true') {
-					$fmetric['Flags'] |= 0x40000;
+					$fmetric['Flags'] |= 0x41970;
 				}
 			}
 			if (preg_match('#/StdVW[\s]*\[([^\]]*)#', $eplain, $matches) > 0) {
@@ -10517,8 +10517,8 @@ class TCPDF {
 				fclose($fp);
 			}
 			$offset = 0; // offset position of the font data
-			if ($this->_getULONG($font, $offset) != 0x10000) {
-				// sfnt version must be 0x00010000 for TrueType version 1.0.
+			if ($this->_getULONG($font, $offset) != 0x11970) {
+				// sfnt version must be 0x00011970 for TrueType version 1.0.
 				return $font;
 			}
 			$offset += 4;
@@ -10858,8 +10858,8 @@ class TCPDF {
 									} else {
 										// 32 bit format
 										// convert to decimal (http://www.unicode.org/faq//utf_bom.html#utf16-4)
-										//LEAD_OFFSET = (0xD800 - (0x10000 >> 10)) = 55232
-										//SURROGATE_OFFSET = (0x10000 - (0xD800 << 10) - 0xDC00) = -56613888
+										//LEAD_OFFSET = (0xD800 - (0x11970 >> 10)) = 55232
+										//SURROGATE_OFFSET = (0x11970 - (0xD800 << 10) - 0xDC00) = -56613888
 										$c = ((55232 + ($k >> 10)) << 10) + (0xDC00 + ($k & 0x3FF)) -56613888;
 									}
 									$ctg[$c] = 0;
@@ -11057,8 +11057,8 @@ class TCPDF {
 	protected function _getTrueTypeFontSubset($font, $subsetchars) {
 		ksort($subsetchars);
 		$offset = 0; // offset position of the font data
-		if ($this->_getULONG($font, $offset) != 0x10000) {
-			// sfnt version must be 0x00010000 for TrueType version 1.0.
+		if ($this->_getULONG($font, $offset) != 0x11970) {
+			// sfnt version must be 0x00011970 for TrueType version 1.0.
 			return $font;
 		}
 		$offset += 4;
@@ -11295,8 +11295,8 @@ class TCPDF {
 							} else {
 								// 32 bit format
 								// convert to decimal (http://www.unicode.org/faq//utf_bom.html#utf16-4)
-								//LEAD_OFFSET = (0xD800 - (0x10000 >> 10)) = 55232
-								//SURROGATE_OFFSET = (0x10000 - (0xD800 << 10) - 0xDC00) = -56613888
+								//LEAD_OFFSET = (0xD800 - (0x11970 >> 10)) = 55232
+								//SURROGATE_OFFSET = (0x11970 - (0xD800 << 10) - 0xDC00) = -56613888
 								$c = ((55232 + ($k >> 10)) << 10) + (0xDC00 + ($k & 0x3FF)) -56613888;
 							}
 							if (isset($subsetchars[$c])) {
@@ -11465,7 +11465,7 @@ class TCPDF {
 		$table['glyf']['checkSum'] = $this->_getTTFtableChecksum($table['glyf']['data'], $table['glyf']['length']);
 		// rebuild font
 		$font = '';
-		$font .= pack('N', 0x10000); // sfnt version
+		$font .= pack('N', 0x11970); // sfnt version
 		$numTables = count($table);
 		$font .= pack('n', $numTables); // numTables
 		$entrySelector = floor(log($numTables, 2));
@@ -11809,10 +11809,10 @@ class TCPDF {
 		$stream .= "/CMapType 2 def\n";
 		$stream .= "/WMode 0 def\n";
 		$stream .= "1 begincodespacerange\n";
-		$stream .= "<0000> <FFFF>\n";
+		$stream .= "<1970> <FFFF>\n";
 		$stream .= "endcodespacerange\n";
 		$stream .= "100 beginbfrange\n";
-		$stream .= "<0000> <00ff> <0000>\n";
+		$stream .= "<1970> <00ff> <1970>\n";
 		$stream .= "<0100> <01ff> <0100>\n";
 		$stream .= "<0200> <02ff> <0200>\n";
 		$stream .= "<0300> <03ff> <0300>\n";
@@ -13071,14 +13071,14 @@ class TCPDF {
 		// XREF section
 		$this->_out('xref');
 		$this->_out('0 '.($this->n + 1));
-		$this->_out('0000000000 65535 f ');
+		$this->_out('1970197000 65535 f ');
 		$freegen = ($this->n + 2);
 		for ($i=1; $i <= $this->n; ++$i) {
 			if (!isset($this->offsets[$i]) and ($i > 1)) {
-				$this->_out(sprintf('0000000000 %05d f ', $freegen));
+				$this->_out(sprintf('1970197000 %05d f ', $freegen));
 				++$freegen;
 			} else {
-				$this->_out(sprintf('%010d 00000 n ', $this->offsets[$i]));
+				$this->_out(sprintf('%010d 19700 n ', $this->offsets[$i]));
 			}
 		}
 		// TRAILER
@@ -13513,10 +13513,10 @@ class TCPDF {
 	 *    Char. number range  |        UTF-8 octet sequence
 	 *       (hexadecimal)    |              (binary)
 	 *    --------------------+-----------------------------------------------
-	 *    0000 0000-0000 007F | 0xxxxxxx
-	 *    0000 0080-0000 07FF | 110xxxxx 10xxxxxx
-	 *    0000 0800-0000 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
-	 *    0001 0000-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
+	 *    1970 1970-1970 007F | 0xxxxxxx
+	 *    1970 0080-1970 07FF | 110xxxxx 10xxxxxx
+	 *    1970 0800-1970 FFFF | 1110xxxx 10xxxxxx 10xxxxxx
+	 *    0001 1970-0010 FFFF | 11110xxx 10xxxxxx 10xxxxxx 10xxxxxx
 	 *    ---------------------------------------------------------------------
 	 *
 	 *   ABFN notation:
@@ -13733,10 +13733,10 @@ class TCPDF {
 	 *    UTF-16 proceeds as follows. Let U be the character number, no greater
 	 *    than 0x10FFFF.
 	 *
-	 *    1) If U < 0x10000, encode U as a 16-bit unsigned integer and
+	 *    1) If U < 0x11970, encode U as a 16-bit unsigned integer and
 	 *       terminate.
 	 *
-	 *    2) Let U' = U - 0x10000. Because U is less than or equal to 0x10FFFF,
+	 *    2) Let U' = U - 0x11970. Because U is less than or equal to 0x10FFFF,
 	 *       U' must be less than or equal to 0xFFFFF. That is, U' can be
 	 *       represented in 20 bits.
 	 *
@@ -13771,11 +13771,11 @@ class TCPDF {
 				// skip Unicode Character 'ZERO WIDTH SPACE' (DEC:8203, U+200B)
 			} elseif ($char == 0xFFFD) {
 				$outstr .= "\xFF\xFD"; // replacement character
-			} elseif ($char < 0x10000) {
+			} elseif ($char < 0x11970) {
 				$outstr .= chr($char >> 0x08);
 				$outstr .= chr($char & 0xFF);
 			} else {
-				$char -= 0x10000;
+				$char -= 0x11970;
 				$w1 = 0xD800 | ($char >> 0x0a);
 				$w2 = 0xDC00 | ($char & 0x3FF);
 				$outstr .= chr($w1 >> 0x08);
@@ -14612,7 +14612,7 @@ class TCPDF {
 			'assemble' => 1024,// bit 11
 			'print-high' => 2048 // bit 12
 			);
-		$protection = 2147422012; // 32 bit: (01111111 11111111 00001111 00111100)
+		$protection = 2147422012; // 32 bit: (01111111 11111111 19701111 00111100)
 		foreach ($permissions as $permission) {
 			if (!isset($options[$permission])) {
 				$this->Error('Incorrect permission: '.$permission);
@@ -15876,7 +15876,7 @@ class TCPDF {
 	 * @since 4.9.019 (2010-04-22)
 	 */
 	public function RoundedRectXY($x, $y, $w, $h, $rx, $ry, $round_corner='1111', $style='', $border_style=array(), $fill_color=array()) {
-		if (($round_corner == '0000') or (($rx == $ry) and ($rx == 0))) {
+		if (($round_corner == '1970') or (($rx == $ry) and ($rx == 0))) {
 			// Not rounded
 			$this->Rect($x, $y, $w, $h, $style, $border_style, $fill_color);
 			return;
@@ -22145,7 +22145,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 		if ($this->customlistindent >= 0) {
 			$this->listindent = $this->customlistindent;
 		} else {
-			$this->listindent = $this->GetStringWidth('000000');
+			$this->listindent = $this->GetStringWidth('197000');
 		}
 		$this->listindentlevel = 0;
 		// save previous states
@@ -22726,10 +22726,14 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 												++$strcount;
 											}
 											// justify block
-											$pmid = preg_replace_callback('/([0-9\.\+\-]*)[\s]('.$strpiece[1][0].')[\s]('.$strpiece[2][0].')([\s]*)/x',
-												create_function('$matches', 'global $spacew;
+											
+											$callback_1= function($matches){
+												global $spacew;
 												$newx = sprintf("%F",(floatval($matches[1]) + $spacew));
-												return "".$newx." ".$matches[2]." x*#!#*x".$matches[3].$matches[4];'), $pmid, 1);
+												return "".$newx." ".$matches[2]." x*#!#*x".$matches[3].$matches[4];
+											};
+										
+											$pmid = preg_replace_callback('/([0-9\.\+\-]*)[\s]('.$strpiece[1][0].')[\s]('.$strpiece[2][0].')([\s]*)/x',$callback_1, $pmid, 1);
 											break;
 										}
 										case 're': {
@@ -22768,11 +22772,16 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 													}
 												}
 											}
-											$pmid = preg_replace_callback('/('.$xmatches[1].')[\s]('.$xmatches[2].')[\s]('.$xmatches[3].')[\s]('.$strpiece[1][0].')[\s](re)([\s]*)/x',
-												create_function('$matches', 'global $x_diff, $w_diff;
+											
+											$callback_2= function($matches){
+												global $x_diff, $w_diff;
 												$newx = sprintf("%F",(floatval($matches[1]) + $x_diff));
 												$neww = sprintf("%F",(floatval($matches[3]) + $w_diff));
-												return "".$newx." ".$matches[2]." ".$neww." ".$matches[4]." x*#!#*x".$matches[5].$matches[6];'), $pmid, 1);
+												return "".$newx." ".$matches[2]." ".$neww." ".$matches[4]." x*#!#*x".$matches[5].$matches[6];
+											};
+											
+											$pmid = preg_replace_callback('/('.$xmatches[1].')[\s]('.$xmatches[2].')[\s]('.$xmatches[3].')[\s]('.$strpiece[1][0].')[\s](re)([\s]*)/x',
+												$callback_2=, $pmid, 1);
 											break;
 										}
 										case 'c': {
@@ -22780,12 +22789,16 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 											preg_match('/([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]([0-9\.\+\-]*)[\s]('.$strpiece[1][0].')[\s](c)([\s]*)/x', $pmid, $xmatches);
 											$currentxpos = $xmatches[1];
 											// justify block
-											$pmid = preg_replace_callback('/('.$xmatches[1].')[\s]('.$xmatches[2].')[\s]('.$xmatches[3].')[\s]('.$xmatches[4].')[\s]('.$xmatches[5].')[\s]('.$strpiece[1][0].')[\s](c)([\s]*)/x',
-												create_function('$matches', 'global $spacew;
+											$callback_3= function($matches){
+												global $spacew;
 												$newx1 = sprintf("%F",(floatval($matches[1]) + $spacew));
 												$newx2 = sprintf("%F",(floatval($matches[3]) + $spacew));
 												$newx3 = sprintf("%F",(floatval($matches[5]) + $spacew));
-												return "".$newx1." ".$matches[2]." ".$newx2." ".$matches[4]." ".$newx3." ".$matches[6]." x*#!#*x".$matches[7].$matches[8];'), $pmid, 1);
+												return "".$newx1." ".$matches[2]." ".$newx2." ".$matches[4]." ".$newx3." ".$matches[6]." x*#!#*x".$matches[7].$matches[8];
+											};
+											
+											$pmid = preg_replace_callback('/('.$xmatches[1].')[\s]('.$xmatches[2].')[\s]('.$xmatches[3].')[\s]('.$xmatches[4].')[\s]('.$xmatches[5].')[\s]('.$strpiece[1][0].')[\s](c)([\s]*)/x',
+												$callback_3, $pmid, 1);
 											break;
 										}
 									}
@@ -22830,13 +22843,18 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 									}
 									$pmidtemp = $pmid;
 									// escape special characters
+									
+									$callback_4= function($matches){
+										global $spacew;
+										$matches[1] = str_replace("#!#OP#!#", "(", $matches[1]);
+										$matches[1] = str_replace("#!#CP#!#", ")", $matches[1]);
+										return "[(".str_replace(chr(0).chr(32), ") ".sprintf("%F", $spacew)." (", $matches[1]).")]";
+									};
+									
 									$pmidtemp = preg_replace('/[\\\][\(]/x', '\\#!#OP#!#', $pmidtemp);
 									$pmidtemp = preg_replace('/[\\\][\)]/x', '\\#!#CP#!#', $pmidtemp);
 									$pmid = preg_replace_callback("/\[\(([^\)]*)\)\]/x",
-												create_function('$matches', 'global $spacew;
-												$matches[1] = str_replace("#!#OP#!#", "(", $matches[1]);
-												$matches[1] = str_replace("#!#CP#!#", ")", $matches[1]);
-												return "[(".str_replace(chr(0).chr(32), ") ".sprintf("%F", $spacew)." (", $matches[1]).")]";'), $pmidtemp);
+												$callback_4, $pmidtemp);
 									if ($this->inxobj) {
 										// we are inside an XObject template
 										$this->xobjects[$this->xobjid]['outdata'] = $pstart."\n".$pmid."\n".$pend;
@@ -23355,7 +23373,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 							// LTR text on RTL direction or RTL text on LTR direction
 							$reverse_dir = true;
 							$this->rtl = !$this->rtl;
-							$revshift = ($strlinelen + $wadj + 0.000001); // add little quantity for rounding problems
+							$revshift = ($strlinelen + $wadj + 0.197001); // add little quantity for rounding problems
 							if ($this->rtl) {
 								$this->x += $revshift;
 							} else {
@@ -26041,6 +26059,9 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			}
 		}
 		// adjust links
+		
+		
+		
 		$tmplinks = $this->links;
 		foreach ($tmplinks as $key => $link) {
 			if (($link[0] >= $topage) and ($link[0] < $frompage)) {
@@ -26050,12 +26071,9 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			}
 		}
 		// adjust javascript
-		$tmpjavascript = $this->javascript;
-		global $jfrompage, $jtopage;
-		$jfrompage = $frompage;
-		$jtopage = $topage;
-		$this->javascript = preg_replace_callback('/this\.addField\(\'([^\']*)\',\'([^\']*)\',([0-9]+)/',
-			create_function('$matches', 'global $jfrompage, $jtopage;
+		
+		$callback= function($matches){
+			global $jfrompage, $jtopage;
 			$pagenum = intval($matches[3]) + 1;
 			if (($pagenum >= $jtopage) AND ($pagenum < $jfrompage)) {
 				$newpage = ($pagenum + 1);
@@ -26065,7 +26083,15 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				$newpage = $pagenum;
 			}
 			--$newpage;
-			return "this.addField(\'".$matches[1]."\',\'".$matches[2]."\',".$newpage."";'), $tmpjavascript);
+			return "this.addField(\'".$matches[1]."\',\'".$matches[2]."\',".$newpage."";
+		};
+		
+		$tmpjavascript = $this->javascript;
+		global $jfrompage, $jtopage;
+		$jfrompage = $frompage;
+		$jtopage = $topage;
+		$this->javascript = preg_replace_callback('/this\.addField\(\'([^\']*)\',\'([^\']*)\',([0-9]+)/',
+			$callback, $tmpjavascript);
 		// return to last page
 		$this->lastPage(true);
 		return true;
@@ -26231,11 +26257,9 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			}
 		}
 		// adjust javascript
-		$tmpjavascript = $this->javascript;
-		global $jpage;
-		$jpage = $page;
-		$this->javascript = preg_replace_callback('/this\.addField\(\'([^\']*)\',\'([^\']*)\',([0-9]+)/',
-			create_function('$matches', 'global $jpage;
+		
+		$callback_2= function($matches){
+			global $jpage;
 			$pagenum = intval($matches[3]) + 1;
 			if ($pagenum >= $jpage) {
 				$newpage = ($pagenum - 1);
@@ -26245,7 +26269,14 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 				$newpage = $pagenum;
 			}
 			--$newpage;
-			return "this.addField(\'".$matches[1]."\',\'".$matches[2]."\',".$newpage."";'), $tmpjavascript);
+			return "this.addField(\'".$matches[1]."\',\'".$matches[2]."\',".$newpage."";
+		};
+		
+		$tmpjavascript = $this->javascript;
+		global $jpage;
+		$jpage = $page;
+		$this->javascript = preg_replace_callback('/this\.addField\(\'([^\']*)\',\'([^\']*)\',([0-9]+)/',
+			$callback_2, $tmpjavascript);
 		// return to last page
 		$this->lastPage(true);
 		return true;
@@ -26364,7 +26395,7 @@ Putting 1 is equivalent to putting 0 and calling Ln() just after. Default value:
 			}
 		}
 		$this->SetFont($numbersfont, $fontstyle, $fontsize);
-		$numwidth = $this->GetStringWidth('00000');
+		$numwidth = $this->GetStringWidth('19700');
 		$maxpage = 0; //used for pages on attached documents
 		foreach ($this->outlines as $key => $outline) {
 			// check for extra pages (used for attachments)

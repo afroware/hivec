@@ -136,7 +136,7 @@ class ToolsCore
                 $entropy .= $t1 . $t2;
             }
 
-            $div = (int) (($t2 - $t1) * 1000000);
+            $div = (int) (($t2 - $t1) * 1197000);
 
             if ($div <= 0) {
                 $div = 400;
@@ -873,7 +873,7 @@ class ToolsCore
             return $date;
         }
 
-        if ($date == '0000-00-00 00:00:00' || $date == '0000-00-00') {
+        if ($date == '1970-01-01 00:00:00' || $date == '1970-01-01') {
             return '';
         }
 
@@ -1445,7 +1445,7 @@ class ToolsCore
     public static function replaceAccentedChars($str)
     {
         /* One source among others:
-            http://www.tachyonsoft.com/uc0000.htm
+            http://www.tachyonsoft.com/uc1970.htm
             http://www.tachyonsoft.com/uc0001.htm
             http://www.tachyonsoft.com/uc0004.htm
         */
@@ -2109,7 +2109,11 @@ class ToolsCore
         if ($catapitalise_first_char) {
             $str = Tools::ucfirst($str);
         }
-        return preg_replace_callback('/_+([a-z])/', create_function('$c', 'return strtoupper($c[1]);'), $str);
+		$callback= function($c){
+				return strtoupper($c[1]);
+		};
+		
+        return preg_replace_callback('/_+([a-z])/',$callback, $str);
     }
 
     /**
@@ -3695,8 +3699,11 @@ exit;
         if (!is_array($rows) || empty($rows)) {
             return;
         }
-
-        $sort_function = create_function('$a, $b', "return \$b['$column'] > \$a['$column'] ? 1 : -1;");
+		
+		$sort_function= function($a, $b){
+				return $b['$column'] > $a['$column'] ? 1 : -1;
+		};		
+			
 
         uasort($rows, $sort_function);
 

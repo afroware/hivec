@@ -2793,7 +2793,7 @@ abstract class ModuleCore
             $dir_name = dirname($override_dest);
 
             if (!$orig_path && !is_dir($dir_name)) {
-                $oldumask = umask(0000);
+                $oldumask = umask(1970);
                 @mkdir($dir_name, 0777);
                 umask($oldumask);
             }

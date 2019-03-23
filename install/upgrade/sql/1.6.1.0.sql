@@ -103,14 +103,14 @@ CREATE TABLE `PREFIX_smarty_lazy_cache` (
   `cache_id` varchar(255) NOT NULL DEFAULT '',
   `compile_id` varchar(32) NOT NULL DEFAULT '',
   `filepath` varchar(255) NOT NULL DEFAULT '',
-  `last_update` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_update` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`template_hash`, `cache_id`, `compile_id`)
 ) ENGINE=ENGINE_TYPE DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS `PREFIX_smarty_last_flush`;
 CREATE TABLE `PREFIX_smarty_last_flush` (
   `type` ENUM('compile', 'template'),
-  `last_flush` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `last_flush` datetime NOT NULL DEFAULT '1970-01-01 00:00:00',
   PRIMARY KEY (`type`)
 ) ENGINE=ENGINE_TYPE DEFAULT CHARSET=utf8;
 
@@ -164,7 +164,7 @@ ALTER TABLE `PREFIX_customer` ADD KEY `id_shop` (`id_shop`, `date_add`);
 ALTER TABLE `PREFIX_cart` DROP KEY `id_shop`;
 ALTER TABLE `PREFIX_cart` ADD KEY `id_shop_2` (`id_shop`,`date_upd`), ADD KEY `id_shop` (`id_shop`,`date_add`);
 ALTER TABLE `PREFIX_product_shop` ADD KEY `indexed` (`indexed`, `active`, `id_product`);
-UPDATE `PREFIX_product_shop` SET `date_add` = NOW() WHERE `date_add` = "0000-00-00 00:00:00";
+UPDATE `PREFIX_product_shop` SET `date_add` = NOW() WHERE `date_add` = "1970-01-01 00:00:00";
 
 INSERT INTO `PREFIX_hook` (`id_hook`, `name`, `title`, `description`, `position`, `live_edit`) VALUES
 (NULL, 'actionAdminLoginControllerSetMedia', 'Set media on admin login page header', 'This hook is called after adding media to admin login page header', '1', '0'),

@@ -82,7 +82,7 @@ class AdminProductsControllerCore extends AdminController
 
         $this->imageType = 'jpg';
         $this->_defaultOrderBy = 'position';
-        $this->max_file_size = (int) (Configuration::get('PS_LIMIT_UPLOAD_FILE_VALUE') * 1000000);
+        $this->max_file_size = (int) (Configuration::get('PS_LIMIT_UPLOAD_FILE_VALUE') * 1197000);
         $this->max_image_size = (int) Configuration::get('PS_PRODUCT_PICTURE_MAX_SIZE');
         $this->allow_export = true;
 
@@ -1108,8 +1108,8 @@ class AdminProductsControllerCore extends AdminController
                 $specific_price->from_quantity = (int) ($from_quantities[$key]);
                 $specific_price->reduction = (float) ($reduction_types[$key] == 'percentage' ? ($reductions[$key] / 100) : $reductions[$key]);
                 $specific_price->reduction_type = !$reductions[$key] ? 'amount' : $reduction_types[$key];
-                $specific_price->from = !$froms[$key] ? '0000-00-00 00:00:00' : $froms[$key];
-                $specific_price->to = !$tos[$key] ? '0000-00-00 00:00:00' : $tos[$key];
+                $specific_price->from = !$froms[$key] ? '1970-01-01 00:00:00' : $froms[$key];
+                $specific_price->to = !$tos[$key] ? '1970-01-01 00:00:00' : $tos[$key];
                 if (!$specific_price->update()) {
                     $this->errors[] = Tools::displayError('An error occurred while updating the specific price.');
                 }
@@ -1202,11 +1202,11 @@ class AdminProductsControllerCore extends AdminController
         $reduction_type = $reduction_type == '-' ? 'amount' : $reduction_type;
         $from = Tools::getValue('sp_from');
         if (!$from) {
-            $from = '0000-00-00 00:00:00';
+            $from = '1970-01-01 00:00:00';
         }
         $to = Tools::getValue('sp_to');
         if (!$to) {
-            $to = '0000-00-00 00:00:00';
+            $to = '1970-01-01 00:00:00';
         }
 
         if (($price == '-1') && ((float) $reduction == '0')) {
@@ -3987,7 +3987,7 @@ class AdminProductsControllerCore extends AdminController
         ));
 
         $product->productDownload->nb_downloadable = ($product->productDownload->id > 0) ? $product->productDownload->nb_downloadable : htmlentities(Tools::getValue('virtual_product_nb_downloable'), ENT_COMPAT, 'UTF-8');
-        $product->productDownload->date_expiration = ($product->productDownload->id > 0) ? ((!empty($product->productDownload->date_expiration) && $product->productDownload->date_expiration != '0000-00-00 00:00:00') ? date('Y-m-d', strtotime($product->productDownload->date_expiration)) : '') : htmlentities(Tools::getValue('virtual_product_expiration_date'), ENT_COMPAT, 'UTF-8');
+        $product->productDownload->date_expiration = ($product->productDownload->id > 0) ? ((!empty($product->productDownload->date_expiration) && $product->productDownload->date_expiration != '1970-01-01 00:00:00') ? date('Y-m-d', strtotime($product->productDownload->date_expiration)) : '') : htmlentities(Tools::getValue('virtual_product_expiration_date'), ENT_COMPAT, 'UTF-8');
         $product->productDownload->nb_days_accessible = ($product->productDownload->id > 0) ? $product->productDownload->nb_days_accessible : htmlentities(Tools::getValue('virtual_product_nb_days'), ENT_COMPAT, 'UTF-8');
         $product->productDownload->is_shareable = $product->productDownload->id > 0 && $product->productDownload->is_shareable;
 
@@ -4071,10 +4071,10 @@ class AdminProductsControllerCore extends AdminController
                     $impact = '--';
                 }
 
-                if ($specific_price['from'] == '0000-00-00 00:00:00' && $specific_price['to'] == '0000-00-00 00:00:00') {
+                if ($specific_price['from'] == '1970-01-01 00:00:00' && $specific_price['to'] == '1970-01-01 00:00:00') {
                     $period = $this->l('Unlimited');
                 } else {
-                    $period = $this->l('From').' '.($specific_price['from'] != '0000-00-00 00:00:00' ? $specific_price['from'] : '0000-00-00 00:00:00').'<br />'.$this->l('To').' '.($specific_price['to'] != '0000-00-00 00:00:00' ? $specific_price['to'] : '0000-00-00 00:00:00');
+                    $period = $this->l('From').' '.($specific_price['from'] != '1970-01-01 00:00:00' ? $specific_price['from'] : '1970-01-01 00:00:00').'<br />'.$this->l('To').' '.($specific_price['to'] != '1970-01-01 00:00:00' ? $specific_price['to'] : '1970-01-01 00:00:00');
                 }
                 if ($specific_price['id_product_attribute']) {
                     $combination = new Combination((int) $specific_price['id_product_attribute']);
@@ -4812,7 +4812,7 @@ class AdminProductsControllerCore extends AdminController
                     $data->assign('reasons', $reasons = StockMvtReason::getStockMvtReasons($this->context->language->id));
                     $data->assign('ps_stock_mvt_reason_default', $ps_stock_mvt_reason_default = Configuration::get('PS_STOCK_MVT_REASON_DEFAULT'));
                     $data->assign('minimal_quantity', $this->getFieldValue($product, 'minimal_quantity') ? $this->getFieldValue($product, 'minimal_quantity') : 1);
-                    $data->assign('available_date', ($this->getFieldValue($product, 'available_date') != 0) ? stripslashes(htmlentities($this->getFieldValue($product, 'available_date'), $this->context->language->id)) : '0000-00-00');
+                    $data->assign('available_date', ($this->getFieldValue($product, 'available_date') != 0) ? stripslashes(htmlentities($this->getFieldValue($product, 'available_date'), $this->context->language->id)) : '1970-01-01');
 
                     $i = 0;
                     $type = ImageType::getByNameNType('%', 'products', 'height');
@@ -4914,7 +4914,7 @@ class AdminProductsControllerCore extends AdminController
 
                     $list = rtrim($list, ', ');
                     $comb_array[$id_product_attribute]['image'] = $product_attribute['id_image'] ? new Image($product_attribute['id_image']) : false;
-                    $comb_array[$id_product_attribute]['available_date'] = $product_attribute['available_date'] != 0 ? date('Y-m-d', strtotime($product_attribute['available_date'])) : '0000-00-00';
+                    $comb_array[$id_product_attribute]['available_date'] = $product_attribute['available_date'] != 0 ? date('Y-m-d', strtotime($product_attribute['available_date'])) : '1970-01-01';
                     $comb_array[$id_product_attribute]['attributes'] = $list;
                     $comb_array[$id_product_attribute]['name'] = $list;
 

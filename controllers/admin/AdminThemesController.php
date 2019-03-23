@@ -619,7 +619,7 @@ class AdminThemesControllerCore extends AdminController
             }
 
             if (isset($_FILES['image_preview']) && $_FILES['image_preview']['error'] == 0) {
-                if (@getimagesize($_FILES['image_preview']['tmp_name']) && !ImageManager::validateUpload($_FILES['image_preview'], 300000)) {
+                if (@getimagesize($_FILES['image_preview']['tmp_name']) && !ImageManager::validateUpload($_FILES['image_preview'], 319700)) {
                     move_uploaded_file($_FILES['image_preview']['tmp_name'], _PS_ALL_THEMES_DIR_.$theme->directory.'/preview.jpg');
                 } else {
                     $this->errors[] = $this->l('Image is not valid.');

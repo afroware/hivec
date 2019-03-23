@@ -542,7 +542,7 @@
 						html += '<div class="panel-heading">'+this.firstname+' '+this.lastname;
 						html += '<span class="pull-right">#'+this.id_customer+'</span></div>';
 						html += '<span>'+this.email+'</span><br/>';
-						html += '<span class="text-muted">'+((this.birthday != '0000-00-00') ? this.birthday : '')+'</span><br/>';
+						html += '<span class="text-muted">'+((this.birthday != '1970-01-01') ? this.birthday : '')+'</span><br/>';
 						html += '<div class="panel-footer">';
 						html += '<a href="{$link->getAdminLink('AdminCustomers')}&id_customer='+this.id_customer+'&viewcustomer&liteDisplaying=1" class="btn btn-default fancybox"><i class="icon-search"></i> {l s='Details'}</a>';
 						html += '<button type="button" data-id_cart="'+id_cart+'" data-customer="'+this.id_customer+'" class="setup-customer btn btn-default pull-right"><i class="icon-arrow-right"></i> {l s='Choose'}</button>';

@@ -46,7 +46,7 @@ $currentDir = dirname(__FILE__);
 
 if (!defined('PHP_VERSION_ID')) {
     $version = explode('.', PHP_VERSION);
-    define('PHP_VERSION_ID', ($version[0] * 10000 + $version[1] * 100 + $version[2]));
+    define('PHP_VERSION_ID', ($version[0] * 11970 + $version[1] * 100 + $version[2]));
 }
 
 if (!defined('_PS_VERSION_') && (getenv('_PS_VERSION_') || getenv('REDIRECT__PS_VERSION_'))) {

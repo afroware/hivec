@@ -99,12 +99,12 @@ class GetFileControllerCore extends FrontController
             $now = time();
 
             $product_deadline = strtotime($info['download_deadline']);
-            if ($now > $product_deadline && $info['download_deadline'] != '0000-00-00 00:00:00') {
+            if ($now > $product_deadline && $info['download_deadline'] != '1970-01-01 00:00:00') {
                 $this->displayCustomError('The product deadline is in the past.');
             }
 
             $customer_deadline = strtotime($info['date_expiration']);
-            if ($now > $customer_deadline && $info['date_expiration'] != '0000-00-00 00:00:00') {
+            if ($now > $customer_deadline && $info['date_expiration'] != '1970-01-01 00:00:00') {
                 $this->displayCustomError('Expiration date has passed, you cannot download this product');
             }
 

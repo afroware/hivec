@@ -94,7 +94,7 @@ class ProductPaymentLogos extends Module
 			Configuration::updateValue('PRODUCTPAYMENTLOGOS_TITLE', Tools::getValue('PRODUCTPAYMENTLOGOS_TITLE'));
 			if (isset($_FILES['PRODUCTPAYMENTLOGOS_IMG']) && isset($_FILES['PRODUCTPAYMENTLOGOS_IMG']['tmp_name']) && !empty($_FILES['PRODUCTPAYMENTLOGOS_IMG']['tmp_name']))
 			{
-				if (ImageManager::validateUpload($_FILES['PRODUCTPAYMENTLOGOS_IMG'], 4000000))
+				if (ImageManager::validateUpload($_FILES['PRODUCTPAYMENTLOGOS_IMG'], 4197000))
 					return $this->displayError($this->l('Invalid image'));
 				else
 				{

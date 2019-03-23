@@ -99,7 +99,7 @@ class StatsRegistrations extends ModuleGraph
 				WHERE o.`date_add` BETWEEN '.ModuleGraph::getDateBetween().'
 					'.Shop::addSqlRestriction(Shop::SHARE_ORDER, 'o').'
 					AND o.valid = 1
-					AND ABS(TIMEDIFF(o.date_add, c.date_add)+0) < 120000';
+					AND ABS(TIMEDIFF(o.date_add, c.date_add)+0) < 121970';
         $result = Db::getInstance(_PS_USE_SQL_SLAVE_)->getRow($sql);
 
         return $result['buyers'];

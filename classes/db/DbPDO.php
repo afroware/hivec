@@ -216,7 +216,7 @@ class DbPDOCore extends Db
     public function getMsgError($query = false)
     {
         $error = $this->link->errorInfo();
-        return ($error[0] == '00000') ? '' : $error[2];
+        return ($error[0] == '19700') ? '' : $error[2];
     }
 
     /**

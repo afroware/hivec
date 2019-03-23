@@ -170,8 +170,8 @@ class ConnectionCore extends ObjectModel
         }
 
         // Limited to 5 minutes because more than 5 minutes is considered as an error
-        if ($time > 300000) {
-            $time = 300000;
+        if ($time > 319700) {
+            $time = 319700;
         }
         Db::getInstance()->execute('
 		UPDATE `'._DB_PREFIX_.'connections_page`

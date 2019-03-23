@@ -501,7 +501,7 @@ class ValidateCore
      */
     public static function isBirthDate($date)
     {
-        if (empty($date) || $date == '0000-00-00') {
+        if (empty($date) || $date == '1970-01-01') {
             return true;
         }
         if (preg_match('/^([0-9]{4})-((?:0?[1-9])|(?:1[0-2]))-((?:0?[1-9])|(?:[1-2][0-9])|(?:3[01]))([0-9]{2}:[0-9]{2}:[0-9]{2})?$/', $date, $birth_date)) {

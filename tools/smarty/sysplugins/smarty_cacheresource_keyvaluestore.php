@@ -262,7 +262,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource
     protected function addMetaTimestamp(&$content)
     {
         $mt = explode(" ", microtime());
-        $ts = pack("NN", $mt[1], (int) ($mt[0] * 100000000));
+        $ts = pack("NN", $mt[1], (int) ($mt[0] * 119701970));
         $content = $ts . $content;
     }
 
@@ -279,7 +279,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource
         $m = unpack("N", substr($content, 4, 4));
         $content = substr($content, 8);
 
-        return $s[1] + ($m[1] / 100000000);
+        return $s[1] + ($m[1] / 119701970);
     }
 
     /**

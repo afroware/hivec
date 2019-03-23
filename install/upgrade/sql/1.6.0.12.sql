@@ -49,10 +49,10 @@ ALTER TABLE `PREFIX_customization_field_lang` DROP PRIMARY KEY, ADD PRIMARY KEY 
 
 /* PHP:customization_field_multishop_lang(); */;
 
-ALTER TABLE `PREFIX_product` CHANGE `available_date` `available_date` DATE NOT NULL DEFAULT '0000-00-00';
-ALTER TABLE `PREFIX_product_shop` CHANGE `available_date` `available_date` DATE NOT NULL DEFAULT '0000-00-00';
-ALTER TABLE `PREFIX_product_attribute` CHANGE `available_date` `available_date` DATE NOT NULL DEFAULT '0000-00-00';
-ALTER TABLE `PREFIX_product_attribute_shop` CHANGE `available_date` `available_date` DATE NOT NULL DEFAULT '0000-00-00';
+ALTER TABLE `PREFIX_product` CHANGE `available_date` `available_date` DATE NOT NULL DEFAULT '1970-01-01';
+ALTER TABLE `PREFIX_product_shop` CHANGE `available_date` `available_date` DATE NOT NULL DEFAULT '1970-01-01';
+ALTER TABLE `PREFIX_product_attribute` CHANGE `available_date` `available_date` DATE NOT NULL DEFAULT '1970-01-01';
+ALTER TABLE `PREFIX_product_attribute_shop` CHANGE `available_date` `available_date` DATE NOT NULL DEFAULT '1970-01-01';
 
 ALTER TABLE `PREFIX_module_access` CHANGE `view` `view` TINYINT( 1 ) NOT NULL DEFAULT '0',
 CHANGE `configure` `configure` TINYINT( 1 ) NOT NULL DEFAULT '0',

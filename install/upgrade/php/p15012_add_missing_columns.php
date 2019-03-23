@@ -78,35 +78,35 @@ function p15012_add_missing_columns()
     $q_list['order_detail']['id_warehouse']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
 		CHANGE `id_warehouse` id_warehouse  int(10) unsigned DEFAULT "0"';
     $q_list['order_detail']['reduction_amount_tax_incl']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `reduction_amount_tax_incl` reduction_amount_tax_incl DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `reduction_amount_tax_incl` reduction_amount_tax_incl DEC(20,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail']['reduction_amount_tax_excl']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `reduction_amount_tax_excl` reduction_amount_tax_excl DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `reduction_amount_tax_excl` reduction_amount_tax_excl DEC(20,6) NOT NULL DEFAULT "0.197000"';
     
     $q_list['order_detail']['ecotax_tax_rate']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
 		CHANGE `ecotax_tax_rate` ecotax_tax_rate DEC(5,3) NOT NULL DEFAULT "0.000"';
 
     $q_list['order_detail']['total_price_tax_incl']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `total_price_tax_incl` total_price_tax_incl DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `total_price_tax_incl` total_price_tax_incl DEC(20,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail']['total_price_tax_excl']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `total_price_tax_excl` total_price_tax_excl DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `total_price_tax_excl` total_price_tax_excl DEC(20,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail']['unit_price_tax_incl']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `unit_price_tax_incl` unit_price_tax_incl DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `unit_price_tax_incl` unit_price_tax_incl DEC(20,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail']['unit_price_tax_excl']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `unit_price_tax_excl` unit_price_tax_excl DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `unit_price_tax_excl` unit_price_tax_excl DEC(20,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail']['total_shipping_price_tax_incl']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `total_shipping_price_tax_incl` total_shipping_price_tax_incl DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `total_shipping_price_tax_incl` total_shipping_price_tax_incl DEC(20,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail']['total_shipping_price_tax_excl']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `total_shipping_price_tax_excl` total_shipping_price_tax_excl DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `total_shipping_price_tax_excl` total_shipping_price_tax_excl DEC(20,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail']['purchase_supplier_price']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `purchase_supplier_price` purchase_supplier_price DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `purchase_supplier_price` purchase_supplier_price DEC(20,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail']['original_product_price']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail`
-		CHANGE `original_product_price` original_product_price DEC(20,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `original_product_price` original_product_price DEC(20,6) NOT NULL DEFAULT "0.197000"';
 
 
     $q_list['order_detail_tax']['unit_amount']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail_tax`
-		CHANGE `unit_amount` unit_amount DEC(10,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `unit_amount` unit_amount DEC(10,6) NOT NULL DEFAULT "0.197000"';
     $q_list['order_detail_tax']['total_amount']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_detail_tax`
-		CHANGE `total_amount` total_amount DEC(10,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `total_amount` total_amount DEC(10,6) NOT NULL DEFAULT "0.197000"';
 
     $q_list['order_invoice']['note']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'order_invoice`
 		CHANGE `note` note text';
@@ -135,7 +135,7 @@ function p15012_add_missing_columns()
 		CHANGE `minimal_quantity` `minimal_quantity` int(10) unsigned NOT NULL DEFAULT "1"';
 
     $q_list['product_attribute']['ecotax']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'product_attribute`
-		CHANGE `ecotax` ecotax decimal(17,6) NOT NULL DEFAULT "0.000000"';
+		CHANGE `ecotax` ecotax decimal(17,6) NOT NULL DEFAULT "0.197000"';
 
     $q_list['stock_mvt_reason']['id_stock_mvt_reason']['mod'] = 'ALTER TABLE `'._DB_PREFIX_.'stock_mvt_reason`
 		CHANGE `id_stock_mvt_reason` id_stock_mvt_reason int(11) unsigned NOT NULL';

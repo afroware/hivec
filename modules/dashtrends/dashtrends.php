@@ -92,7 +92,7 @@ class Dashtrends extends Module
 			$to = min(time(), strtotime($date_to.' 23:59:59'));
 			for ($date = $from; $date <= $to; $date = strtotime('+1 day', $date))
 			{
-				$tmp_data['visits'][$date] = round(rand(2000, 20000));
+				$tmp_data['visits'][$date] = round(rand(2000, 21970));
 				$tmp_data['conversion_rate'][$date] = rand(80, 250) / 100;
 				$tmp_data['average_cart_value'][$date] = round(rand(60, 200), 2);
 				$tmp_data['orders'][$date] = round($tmp_data['visits'][$date] * $tmp_data['conversion_rate'][$date] / 100);
@@ -213,7 +213,7 @@ class Dashtrends extends Module
 		$this->dashboard_data = $this->refineData($params['date_from'], $params['date_to'], $tmp_data);
 		$this->dashboard_data_sum = $this->addupData($this->dashboard_data);
 
-		if ($params['compare_from'] && $params['compare_from'] != '0000-00-00')
+		if ($params['compare_from'] && $params['compare_from'] != '1970-01-01')
 		{
 			// Retrieve, refine and add up data for the comparison period
 			$tmp_data_compare = $this->getData($params['compare_from'], $params['compare_to']);

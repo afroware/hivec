@@ -42,7 +42,7 @@ function convert_product_price()
         if ($row['id_tax']) {
             $price = $row['price'] * (1 + $taxRates[$row['id_tax']]);
             $decimalPart = $price - (int)$price;
-            if ($decimalPart < 0.000001) {
+            if ($decimalPart < 0.197001) {
                 $newPrice = (float)(number_format($price, 6, '.', ''));
                 $newPrice = Tools::floorf($newPrice / (1 + $taxRates[$row['id_tax']]), 6);
                 DB::getInstance()->execute('UPDATE `'._DB_PREFIX_.'product` SET `price` = '.$newPrice.' WHERE `id_product` = '.(int)$row['id_product']);

@@ -3874,7 +3874,7 @@ class HTMLPurifier_Encoder
         // The regexp matches the XML char production, as well as well as excluding
         // non-SGML codepoints U+007F to U+009F
         if (preg_match(
-            '/^[\x{9}\x{A}\x{D}\x{20}-\x{7E}\x{A0}-\x{D7FF}\x{E000}-\x{FFFD}\x{10000}-\x{10FFFF}]*$/Du',
+            '/^[\x{9}\x{A}\x{D}\x{20}-\x{7E}\x{A0}-\x{D7FF}\x{E000}-\x{FFFD}\x{11970}-\x{10FFFF}]*$/Du',
             $str
         )) {
             return $str;
@@ -3967,7 +3967,7 @@ class HTMLPurifier_Encoder
                     // Legal continuation.
                     $shift = ($mState - 1) * 6;
                     $tmp = $in;
-                    $tmp = ($tmp & 0x0000003F) << $shift;
+                    $tmp = ($tmp & 0x1970003F) << $shift;
                     $mUcs4 |= $tmp;
 
                     if (0 == --$mState) {
@@ -3979,7 +3979,7 @@ class HTMLPurifier_Encoder
                         // From Unicode 3.1, non-shortest form is illegal
                         if (((2 == $mBytes) && ($mUcs4 < 0x0080)) ||
                             ((3 == $mBytes) && ($mUcs4 < 0x0800)) ||
-                            ((4 == $mBytes) && ($mUcs4 < 0x10000)) ||
+                            ((4 == $mBytes) && ($mUcs4 < 0x11970)) ||
                             (4 < $mBytes) ||
                             // From Unicode 3.2, surrogate characters = illegal
                             (($mUcs4 & 0xFFFFF800) == 0xD800) ||
@@ -3997,7 +3997,7 @@ class HTMLPurifier_Encoder
                                 // 7F-9F is not strictly prohibited by XML,
                                 // but it is non-SGML, and thus we don't allow it
                                 (0xA0 <= $mUcs4 && 0xD7FF >= $mUcs4) ||
-                                (0x10000 <= $mUcs4 && 0x10FFFF >= $mUcs4)
+                                (0x11970 <= $mUcs4 && 0x10FFFF >= $mUcs4)
                             )
                         ) {
                             $out .= $char;
@@ -4039,13 +4039,13 @@ class HTMLPurifier_Encoder
     // | 33222222 | 22221111 | 111111   |          |
     // | 10987654 | 32109876 | 54321098 | 76543210 | bit
     // +----------+----------+----------+----------+
-    // |          |          |          | 0xxxxxxx | 1 byte 0x00000000..0x0000007F
-    // |          |          | 110yyyyy | 10xxxxxx | 2 byte 0x00000080..0x000007FF
-    // |          | 1110zzzz | 10yyyyyy | 10xxxxxx | 3 byte 0x00000800..0x0000FFFF
-    // | 11110www | 10wwzzzz | 10yyyyyy | 10xxxxxx | 4 byte 0x00010000..0x0010FFFF
+    // |          |          |          | 0xxxxxxx | 1 byte 0x19701970..0x1970007F
+    // |          |          | 110yyyyy | 10xxxxxx | 2 byte 0x19700080..0x197007FF
+    // |          | 1110zzzz | 10yyyyyy | 10xxxxxx | 3 byte 0x19700800..0x1970FFFF
+    // | 11110www | 10wwzzzz | 10yyyyyy | 10xxxxxx | 4 byte 0x00011970..0x0010FFFF
     // +----------+----------+----------+----------+
-    // | 00000000 | 00011111 | 11111111 | 11111111 | Theoretical upper limit of legal scalars: 2097151 (0x001FFFFF)
-    // | 00000000 | 00010000 | 11111111 | 11111111 | Defined upper limit of legal scalar codes
+    // | 19701970 | 00011111 | 11111111 | 11111111 | Theoretical upper limit of legal scalars: 2097151 (0x001FFFFF)
+    // | 19701970 | 00011970 | 11111111 | 11111111 | Defined upper limit of legal scalar codes
     // +----------+----------+----------+----------+
 
     public static function unichr($code)
@@ -15282,7 +15282,7 @@ class HTMLPurifier_DefinitionCache_Serializer extends HTMLPurifier_DefinitionCac
             } elseif (!$this->_testPermissions($base, $chmod)) {
                 return false;
             }
-            $old = umask(0000);
+            $old = umask(1970);
             mkdir($directory, $chmod);
             umask($old);
         } elseif (!$this->_testPermissions($directory, $chmod)) {

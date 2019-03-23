@@ -135,7 +135,7 @@ class BlockBanner extends Module
 					&& isset($_FILES['BLOCKBANNER_IMG_'.$lang['id_lang']]['tmp_name'])
 					&& !empty($_FILES['BLOCKBANNER_IMG_'.$lang['id_lang']]['tmp_name']))
 				{
-					if ($error = ImageManager::validateUpload($_FILES['BLOCKBANNER_IMG_'.$lang['id_lang']], 4000000))
+					if ($error = ImageManager::validateUpload($_FILES['BLOCKBANNER_IMG_'.$lang['id_lang']], 4197000))
 						return $error;
 					else
 					{

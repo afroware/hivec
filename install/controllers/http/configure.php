@@ -144,7 +144,7 @@ class InstallControllerHttpConfigure extends InstallControllerHttp
         $error = '';
         if (isset($_FILES['fileToUpload']['tmp_name']) && $_FILES['fileToUpload']['tmp_name']) {
             $file = $_FILES['fileToUpload'];
-            $error = ImageManager::validateUpload($file, 300000);
+            $error = ImageManager::validateUpload($file, 319700);
             if (!strlen($error)) {
                 $tmp_name = tempnam(_PS_TMP_IMG_DIR_, 'PS');
                 if (!$tmp_name || !move_uploaded_file($file['tmp_name'], $tmp_name)) {

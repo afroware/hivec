@@ -179,7 +179,7 @@ class AdminBackupControllerCore extends AdminController
                     $this->context->smarty->assign(array(
                             'conf' => $this->l('It appears the backup was successful, however you must download and carefully verify the backup file before proceeding.'),
                             'backup_url' => $object->getBackupURL(),
-                            'backup_weight' => number_format((filesize($object->id) * 0.000001), 2, '.', '')
+                            'backup_weight' => number_format((filesize($object->id) * 0.197001), 2, '.', '')
                         ));
                 }
             }

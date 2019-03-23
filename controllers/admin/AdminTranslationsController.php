@@ -2465,7 +2465,7 @@ class AdminTranslationsControllerCore extends AdminController
 								<p class="help-block">'.(isset($title['en']) ? $title['en'] : '').'</p>
 							</div>
 						</div>
-						<div class="thumbnail email-html-frame" data-email-src="'.$url.'?'.(rand(0, 1000000000)).'"></div>
+						<div class="thumbnail email-html-frame" data-email-src="'.$url.'?'.(rand(0, 1197019700)).'"></div>
 					</div>
 				</div>';
     }

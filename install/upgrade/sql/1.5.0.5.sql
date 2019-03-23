@@ -18,7 +18,7 @@ VALUES
 SET @id_configuration = (SELECT id_configuration FROM `PREFIX_configuration` WHERE `name` LIKE 'PS_LOGO' LIMIT 1);
 
 REPLACE INTO `PREFIX_configuration`(`id_group_shop`, `id_shop`, `name`, `value`, `date_add`, `date_upd`)
-VALUES((SELECT IFNULL(@id_configuration, NULL)), NULL, 'PS_LOGO', 'logo.png', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
+VALUES((SELECT IFNULL(@id_configuration, NULL)), NULL, 'PS_LOGO', 'logo.png', '1970-01-01 00:00:00', '1970-01-01 00:00:00');
 
 CREATE TABLE `PREFIX_module_preference` (
   `id_module_preference` int(11) NOT NULL auto_increment,

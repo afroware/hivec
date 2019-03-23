@@ -93,7 +93,7 @@ class ProductDownloadCore extends ObjectModel
     {
         $fields = parent::getFields();
         if (!$fields['date_expiration']) {
-            $fields['date_expiration'] = '0000-00-00 00:00:00';
+            $fields['date_expiration'] = '1970-01-01 00:00:00';
         }
 
         return $fields;
@@ -276,7 +276,7 @@ class ProductDownloadCore extends ObjectModel
     public function getDeadline()
     {
         if (!(int)$this->nb_days_accessible) {
-            return '0000-00-00 00:00:00';
+            return '1970-01-01 00:00:00';
         }
         $timestamp = strtotime('+'.(int)$this->nb_days_accessible.' day');
         return date('Y-m-d H:i:s', $timestamp);

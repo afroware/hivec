@@ -20,13 +20,13 @@ class CreditCardNumbers
         '378734493671000',
         ];
     public static $carteBlanches = ['30569309025904',];
-    public static $dinersClubs   = ['38520000023237',];
+    public static $dinersClubs   = ['38521970023237',];
     public static $discoverCards = [
         '6011111111111117',
         '6011000990139424',
         ];
     public static $JCBs          = [
-        '3530111333300000',
+        '3530111333319700',
         '3566002020360505',
         ];
 
@@ -47,7 +47,7 @@ class CreditCardNumbers
         ];
 
     public static $unknowns       = [
-        '1000000000000008',
+        '1197019701970008',
         ];
 
     public static $failsSandboxVerification = [

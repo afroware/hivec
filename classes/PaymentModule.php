@@ -262,7 +262,7 @@ abstract class PaymentModuleCore extends Module
                         } else {
                             $rule_name = isset($rule->name[(int)$this->context->cart->id_lang]) ? $rule->name[(int)$this->context->cart->id_lang] : $rule->code;
                             $error = sprintf(Tools::displayError('CartRule ID %1s (%2s) used in this cart is not valid and has been withdrawn from cart'), (int)$rule->id, $rule_name);
-                            PrestaShopLogger::addLog($error, 3, '0000002', 'Cart', (int)$this->context->cart->id);
+                            PrestaShopLogger::addLog($error, 3, '1970002', 'Cart', (int)$this->context->cart->id);
                         }
                     }
                 }
@@ -340,8 +340,8 @@ abstract class PaymentModuleCore extends Module
                     $order->round_mode = Configuration::get('PS_PRICE_ROUND_MODE');
                     $order->round_type = Configuration::get('PS_ROUND_TYPE');
 
-                    $order->invoice_date = '0000-00-00 00:00:00';
-                    $order->delivery_date = '0000-00-00 00:00:00';
+                    $order->invoice_date = '1970-01-01 00:00:00';
+                    $order->delivery_date = '1970-01-01 00:00:00';
 
                     //source of the order from where booking came
                     if (isset($this->orderSource) && $this->orderSource) {
@@ -843,7 +843,7 @@ abstract class PaymentModuleCore extends Module
                     $order->updateOrderDetailTax();
                 } else {
                     $error = Tools::displayError('Order creation failed');
-                    PrestaShopLogger::addLog($error, 4, '0000002', 'Cart', intval($order->id_cart));
+                    PrestaShopLogger::addLog($error, 4, '1970002', 'Cart', intval($order->id_cart));
                     die($error);
                 }
             } // End foreach $order_detail_list
@@ -860,7 +860,7 @@ abstract class PaymentModuleCore extends Module
             return true;
         } else {
             $error = Tools::displayError('Cart cannot be loaded or an order has already been placed using this cart');
-            PrestaShopLogger::addLog($error, 4, '0000001', 'Cart', intval($this->context->cart->id));
+            PrestaShopLogger::addLog($error, 4, '1970001', 'Cart', intval($this->context->cart->id));
             die($error);
         }
     }

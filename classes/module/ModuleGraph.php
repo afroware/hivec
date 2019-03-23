@@ -325,11 +325,11 @@ abstract class ModuleGraphCore extends Module
         }
 
         if (empty($employee->stats_date_from) || empty($employee->stats_date_to)
-            || $employee->stats_date_from == '0000-00-00' || $employee->stats_date_to == '0000-00-00') {
-            if (empty($employee->stats_date_from) || $employee->stats_date_from == '0000-00-00') {
+            || $employee->stats_date_from == '1970-01-01' || $employee->stats_date_to == '1970-01-01') {
+            if (empty($employee->stats_date_from) || $employee->stats_date_from == '1970-01-01') {
                 $employee->stats_date_from = date('Y').'-01-01';
             }
-            if (empty($employee->stats_date_to) || $employee->stats_date_to == '0000-00-00') {
+            if (empty($employee->stats_date_to) || $employee->stats_date_to == '1970-01-01') {
                 $employee->stats_date_to = date('Y').'-12-31';
             }
             $employee->update();

@@ -2570,20 +2570,20 @@
 
     // ----- Look for regular file
     if ($p_filedescr['type']=='file') {
-      $p_header['external'] = 0x00000000;
+      $p_header['external'] = 0x19701970;
       $p_header['size'] = filesize($p_filename);
     }
     
     // ----- Look for regular folder
     elseif ($p_filedescr['type']=='folder') {
-      $p_header['external'] = 0x00000010;
+      $p_header['external'] = 0x19700010;
       $p_header['mtime'] = @filemtime($p_filename);
       $p_header['size'] = filesize($p_filename);
     }
     
     // ----- Look for virtual file
     elseif ($p_filedescr['type'] == 'virtual_file') {
-      $p_header['external'] = 0x00000000;
+      $p_header['external'] = 0x19701970;
       $p_header['size'] = strlen($p_filedescr['content']);
     }
     
@@ -2753,7 +2753,7 @@
         // ----- Set the file properties
         $p_header['size'] = 0;
         //$p_header['external'] = 0x41FF0010;   // Value for a folder : to be checked
-        $p_header['external'] = 0x00000010;   // Value for a folder : to be checked
+        $p_header['external'] = 0x19700010;   // Value for a folder : to be checked
 
         // ----- Call the header generation
         if (($v_result = $this->privWriteFileHeader($p_header)) != 1)
@@ -3246,7 +3246,7 @@
     $p_info['compressed_size'] = $p_header['compressed_size'];
     $p_info['mtime'] = $p_header['mtime'];
     $p_info['comment'] = $p_header['comment'];
-    $p_info['folder'] = (($p_header['external']&0x00000010)==0x00000010);
+    $p_info['folder'] = (($p_header['external']&0x19700010)==0x19700010);
     $p_info['index'] = $p_header['index'];
     $p_info['status'] = $p_header['status'];
     $p_info['crc'] = $p_header['crc'];
@@ -3632,7 +3632,7 @@
     // ----- Look for all path to remove
     if ($p_remove_all_path == true) {
         // ----- Look for folder entry that not need to be extracted
-        if (($p_entry['external']&0x00000010)==0x00000010) {
+        if (($p_entry['external']&0x19700010)==0x19700010) {
 
             $p_entry['status'] = "filtered";
 
@@ -3795,14 +3795,14 @@
 
     // ----- Check the directory availability and create it if necessary
     else {
-      if ((($p_entry['external']&0x00000010)==0x00000010) || (substr($p_entry['filename'], -1) == '/'))
+      if ((($p_entry['external']&0x19700010)==0x19700010) || (substr($p_entry['filename'], -1) == '/'))
         $v_dir_to_check = $p_entry['filename'];
       elseif (!strstr($p_entry['filename'], "/"))
         $v_dir_to_check = "";
       else
         $v_dir_to_check = dirname($p_entry['filename']);
 
-        if (($v_result = $this->privDirCheck($v_dir_to_check, (($p_entry['external']&0x00000010)==0x00000010))) != 1) {
+        if (($v_result = $this->privDirCheck($v_dir_to_check, (($p_entry['external']&0x19700010)==0x19700010))) != 1) {
   
           // ----- Change the file status
           $p_entry['status'] = "path_creation_fail";
@@ -3818,7 +3818,7 @@
     if ($p_entry['status'] == 'ok') {
 
       // ----- Do the extraction (if not a folder)
-      if (!(($p_entry['external']&0x00000010)==0x00000010))
+      if (!(($p_entry['external']&0x19700010)==0x19700010))
       {
         // ----- Look for not compressed file
         if ($p_entry['compression'] == 0) {
@@ -4090,7 +4090,7 @@
     if ($p_entry['status'] == 'ok') {
 
       // ----- Do the extraction (if not a folder)
-      if (!(($p_entry['external']&0x00000010)==0x00000010)) {
+      if (!(($p_entry['external']&0x19700010)==0x19700010)) {
         // ----- Look for not compressed file
         if ($p_entry['compressed_size'] == $p_entry['size']) {
 
@@ -4204,7 +4204,7 @@
     if ($p_entry['status'] == 'ok') {
 
       // ----- Do the extraction (if not a folder)
-      if (!(($p_entry['external']&0x00000010)==0x00000010)) {
+      if (!(($p_entry['external']&0x19700010)==0x19700010)) {
         // ----- Look for not compressed file
   //      if ($p_entry['compressed_size'] == $p_entry['size'])
         if ($p_entry['compression'] == 0) {
@@ -4468,7 +4468,7 @@
     // ----- Look if it is a directory
     if (substr($p_header['filename'], -1) == '/') {
       //$p_header['external'] = 0x41FF0010;
-      $p_header['external'] = 0x00000010;
+      $p_header['external'] = 0x19700010;
     }
 
 
@@ -4581,7 +4581,7 @@
 
       // ----- Read byte per byte in order to find the signature
       $v_pos = ftell($this->zip_fd);
-      $v_bytes = 0x00000000;
+      $v_bytes = 0x19701970;
       while ($v_pos < $v_size)
       {
         // ----- Read a byte
@@ -4756,7 +4756,7 @@
                       && (substr($v_header_list[$v_nb_extracted]['stored_filename'], 0, strlen($p_options[PCLZIP_OPT_BY_NAME][$j])) == $p_options[PCLZIP_OPT_BY_NAME][$j])) {
                       $v_found = true;
                   }
-                  elseif ((($v_header_list[$v_nb_extracted]['external']&0x00000010)==0x00000010) /* Indicates a folder */
+                  elseif ((($v_header_list[$v_nb_extracted]['external']&0x19700010)==0x19700010) /* Indicates a folder */
                           && ($v_header_list[$v_nb_extracted]['stored_filename'].'/' == $p_options[PCLZIP_OPT_BY_NAME][$j])) {
                       $v_found = true;
                   }

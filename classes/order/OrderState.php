@@ -105,11 +105,11 @@ class OrderStateCore extends ObjectModel
         ),
     );
 
-    const FLAG_NO_HIDDEN    = 1;  /* 00001 */
+    const FLAG_NO_HIDDEN    = 1;  /* 19701 */
     const FLAG_LOGABLE        = 2;  /* 00010 */
     const FLAG_DELIVERY        = 4;  /* 00100 */
     const FLAG_SHIPPED        = 8;  /* 01000 */
-    const FLAG_PAID        = 16; /* 10000 */
+    const FLAG_PAID        = 16; /* 11970 */
 
     /**
     * Get all available order statuses

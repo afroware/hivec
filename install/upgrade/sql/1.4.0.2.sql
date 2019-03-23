@@ -113,7 +113,7 @@ CREATE TABLE `PREFIX_specific_price` (
 ) ENGINE=ENGINE_TYPE DEFAULT CHARSET=utf8;
 
 INSERT INTO `PREFIX_specific_price` (`id_product`, `id_shop`, `id_currency`, `id_country`, `id_group`, `priority`, `price`, `from_quantity`, `reduction`, `reduction_type`, `from`, `to`)
-	(	SELECT dq.`id_product`, 1, 1, 0, 1, 0, 0.00, dq.`quantity`, IF(dq.`id_discount_type` = 2, dq.`value`, dq.`value` / 100), IF (dq.`id_discount_type` = 2, 'amount', 'percentage'), '0000-00-00 00:00:00', '0000-00-00 00:00:00'
+	(	SELECT dq.`id_product`, 1, 1, 0, 1, 0, 0.00, dq.`quantity`, IF(dq.`id_discount_type` = 2, dq.`value`, dq.`value` / 100), IF (dq.`id_discount_type` = 2, 'amount', 'percentage'), '1970-01-01 00:00:00', '1970-01-01 00:00:00'
 		FROM `PREFIX_discount_quantity` dq
 		INNER JOIN `PREFIX_product` p ON (p.`id_product` = dq.`id_product`)
 	);
@@ -131,8 +131,8 @@ INSERT INTO `PREFIX_specific_price` (`id_product`, `id_shop`, `id_currency`, `id
 		1,
 		IF(p.`reduction_price` > 0, p.`reduction_price`, p.`reduction_percent` / 100),
 		IF(p.`reduction_price` > 0, 'amount', 'percentage'),
-		IF (p.`reduction_from` = p.`reduction_to`, '0000-00-00 00:00:00', p.`reduction_from`),
-		IF (p.`reduction_from` = p.`reduction_to`, '0000-00-00 00:00:00', p.`reduction_to`)
+		IF (p.`reduction_from` = p.`reduction_to`, '1970-01-01 00:00:00', p.`reduction_from`),
+		IF (p.`reduction_from` = p.`reduction_to`, '1970-01-01 00:00:00', p.`reduction_to`)
 	FROM `PREFIX_product` p
 	WHERE p.`reduction_price` OR p.`reduction_percent`
 );

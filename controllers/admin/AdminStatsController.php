@@ -370,7 +370,7 @@ class AdminStatsControllerCore extends AdminStatsTabController
 		SELECT AVG(DATEDIFF("'.date('Y-m-d').' 00:00:00", birthday))
 		FROM `'._DB_PREFIX_.'customer` c
 		WHERE active = 1
-		AND birthday IS NOT NULL AND birthday != "0000-00-00" '.Shop::addSqlRestriction());
+		AND birthday IS NOT NULL AND birthday != "1970-01-01" '.Shop::addSqlRestriction());
         return round($value / 365);
     }
 

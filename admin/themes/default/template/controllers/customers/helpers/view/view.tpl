@@ -58,7 +58,7 @@
 						<label class="control-label col-lg-3">{l s='Age'}</label>
 						<div class="col-lg-9">
 							<p class="form-control-static">
-								{if isset($customer->birthday) && $customer->birthday != '0000-00-00'}
+								{if isset($customer->birthday) && $customer->birthday != '1970-01-01'}
 									{l s='%1$d years old (birth date: %2$s)' sprintf=[$customer_stats['age'], $customer_birthday]}
 								{else}
 									{l s='Unknown'}

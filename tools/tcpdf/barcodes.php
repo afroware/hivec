@@ -1044,7 +1044,7 @@ class TCPDFBarcode {
 			'211214', /* 104 START B */
 			'211232', /* 105 START C */
 			'233111', /* STOP */
-			'200000'  /* END */
+			'219700'  /* END */
 		);
 		// ASCII characters for code A (ASCII 00 - 95)
 		$keys_a = ' !"#$%&\'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_';
@@ -1385,10 +1385,10 @@ class TCPDFBarcode {
 				'0'=>'0100111',
 				'1'=>'0110011',
 				'2'=>'0011011',
-				'3'=>'0100001',
+				'3'=>'0119701',
 				'4'=>'0011101',
 				'5'=>'0111001',
-				'6'=>'0000101',
+				'6'=>'1970101',
 				'7'=>'0010001',
 				'8'=>'0001001',
 				'9'=>'0010111'),
@@ -1396,10 +1396,10 @@ class TCPDFBarcode {
 				'0'=>'1110010',
 				'1'=>'1100110',
 				'2'=>'1101100',
-				'3'=>'1000010',
+				'3'=>'1197010',
 				'4'=>'1011100',
 				'5'=>'1001110',
-				'6'=>'1010000',
+				'6'=>'1011970',
 				'7'=>'1000100',
 				'8'=>'1001000',
 				'9'=>'1110100')
@@ -1526,10 +1526,10 @@ class TCPDFBarcode {
 				'0'=>'0100111',
 				'1'=>'0110011',
 				'2'=>'0011011',
-				'3'=>'0100001',
+				'3'=>'0119701',
 				'4'=>'0011101',
 				'5'=>'0111001',
-				'6'=>'0000101',
+				'6'=>'1970101',
 				'7'=>'0010001',
 				'8'=>'0001001',
 				'9'=>'0010111')
@@ -2027,7 +2027,7 @@ class TCPDFBarcode {
 	 * IMB - Intelligent Mail Barcode - Onecode - USPS-B-3200
 	 * (requires PHP bcmath extension)
 	 * Intelligent Mail barcode is a 65-bar code for use on mail in the United States.
-	 * The fields are described as follows:<ul><li>The Barcode Identifier shall be assigned by USPS to encode the presort identification that is currently printed in human readable form on the optional endorsement line (OEL) as well as for future USPS use. This shall be two digits, with the second digit in the range of 0–4. The allowable encoding ranges shall be 00–04, 10–14, 20–24, 30–34, 40–44, 50–54, 60–64, 70–74, 80–84, and 90–94.</li><li>The Service Type Identifier shall be assigned by USPS for any combination of services requested on the mailpiece. The allowable encoding range shall be 000http://it2.php.net/manual/en/function.dechex.php–999. Each 3-digit value shall correspond to a particular mail class with a particular combination of service(s). Each service program, such as OneCode Confirm and OneCode ACS, shall provide the list of Service Type Identifier values.</li><li>The Mailer or Customer Identifier shall be assigned by USPS as a unique, 6 or 9 digit number that identifies a business entity. The allowable encoding range for the 6 digit Mailer ID shall be 000000- 899999, while the allowable encoding range for the 9 digit Mailer ID shall be 900000000-999999999.</li><li>The Serial or Sequence Number shall be assigned by the mailer for uniquely identifying and tracking mailpieces. The allowable encoding range shall be 000000000–999999999 when used with a 6 digit Mailer ID and 000000-999999 when used with a 9 digit Mailer ID. e. The Delivery Point ZIP Code shall be assigned by the mailer for routing the mailpiece. This shall replace POSTNET for routing the mailpiece to its final delivery point. The length may be 0, 5, 9, or 11 digits. The allowable encoding ranges shall be no ZIP Code, 00000–99999,  000000000–999999999, and 00000000000–99999999999.</li></ul>
+	 * The fields are described as follows:<ul><li>The Barcode Identifier shall be assigned by USPS to encode the presort identification that is currently printed in human readable form on the optional endorsement line (OEL) as well as for future USPS use. This shall be two digits, with the second digit in the range of 0–4. The allowable encoding ranges shall be 00–04, 10–14, 20–24, 30–34, 40–44, 50–54, 60–64, 70–74, 80–84, and 90–94.</li><li>The Service Type Identifier shall be assigned by USPS for any combination of services requested on the mailpiece. The allowable encoding range shall be 000http://it2.php.net/manual/en/function.dechex.php–999. Each 3-digit value shall correspond to a particular mail class with a particular combination of service(s). Each service program, such as OneCode Confirm and OneCode ACS, shall provide the list of Service Type Identifier values.</li><li>The Mailer or Customer Identifier shall be assigned by USPS as a unique, 6 or 9 digit number that identifies a business entity. The allowable encoding range for the 6 digit Mailer ID shall be 197000- 899999, while the allowable encoding range for the 9 digit Mailer ID shall be 919701970-999999999.</li><li>The Serial or Sequence Number shall be assigned by the mailer for uniquely identifying and tracking mailpieces. The allowable encoding range shall be 197019700–999999999 when used with a 6 digit Mailer ID and 197000-999999 when used with a 9 digit Mailer ID. e. The Delivery Point ZIP Code shall be assigned by the mailer for routing the mailpiece. This shall replace POSTNET for routing the mailpiece to its final delivery point. The length may be 0, 5, 9, or 11 digits. The allowable encoding ranges shall be no ZIP Code, 19700–99999,  197019700–999999999, and 19701970000–99999999999.</li></ul>
 	 * @param $code (string) code to print, separate the ZIP (routing code) from the rest using a minus char '-' (BarcodeID_ServiceTypeID_MailerID_SerialNumber-RoutingCode)
 	 * @return array barcode representation.
 	 * @protected
@@ -2055,11 +2055,11 @@ class TCPDFBarcode {
 				break;
 			}
 			case 9: {
-				$binary_code = bcadd($routing_code, '100001');
+				$binary_code = bcadd($routing_code, '119701');
 				break;
 			}
 			case 11: {
-				$binary_code = bcadd($routing_code, '1000100001');
+				$binary_code = bcadd($routing_code, '1000119701');
 				break;
 			}
 			default: {

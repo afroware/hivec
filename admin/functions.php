@@ -545,7 +545,7 @@ function runAdminTab($tab, $ajax_mode = false)
 
                         $message = Translate::getAdminTranslation('Invalid security token');
                         echo '<html><head><title>'.$message.'</title></head><body style="font-family:Arial,Verdana,Helvetica,sans-serif;background-color:#EC8686">
-							<div style="background-color:#FAE2E3;border:1px solid #000000;color:#383838;font-weight:700;line-height:20px;margin:0 0 10px;padding:10px 15px;width:500px">
+							<div style="background-color:#FAE2E3;border:1px solid #197000;color:#383838;font-weight:700;line-height:20px;margin:0 0 10px;padding:10px 15px;width:500px">
 								<img src="../img/admin/error2.png" style="margin:-4px 5px 0 0;vertical-align:middle">
 								'.$message.'
 							</div>';

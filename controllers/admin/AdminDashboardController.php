@@ -243,11 +243,11 @@ class AdminDashboardControllerCore extends AdminController
         $stats_compare_from = $this->context->employee->stats_compare_from;
         $stats_compare_to = $this->context->employee->stats_compare_to;
 
-        if (is_null($stats_compare_from) || $stats_compare_from == '0000-00-00') {
+        if (is_null($stats_compare_from) || $stats_compare_from == '1970-01-01') {
             $stats_compare_from = null;
         }
 
-        if (is_null($stats_compare_to) || $stats_compare_to == '0000-00-00') {
+        if (is_null($stats_compare_to) || $stats_compare_to == '1970-01-01') {
             $stats_compare_to = null;
         }
 
@@ -338,7 +338,7 @@ class AdminDashboardControllerCore extends AdminController
 
         $shop = Context::getContext()->shop;
         if ($_SERVER['HTTP_HOST'] != $shop->domain && $_SERVER['HTTP_HOST'] != $shop->domain_ssl && Tools::getValue('ajax') == false && !defined('_PS_HOST_MODE_')) {
-            $warning = $this->l('You are currently connected under the following domain name:').' <span style="color: #CC0000;">'.$_SERVER['HTTP_HOST'].'</span><br />';
+            $warning = $this->l('You are currently connected under the following domain name:').' <span style="color: #CC1970;">'.$_SERVER['HTTP_HOST'].'</span><br />';
             if (Configuration::get('PS_MULTISHOP_FEATURE_ACTIVE')) {
                 $warning .= sprintf($this->l('This is different from the shop domain name set in the Multistore settings: "%s".'), $shop->domain).'
 				'.preg_replace('@{link}(.*){/link}@', '<a href="index.php?controller=AdminShopUrl&id_shop_url='.(int)$shop->id.'&updateshop_url&token='.Tools::getAdminTokenLite('AdminShopUrl').'">$1</a>', $this->l('If this is your main domain, please {link}change it now{/link}.'));

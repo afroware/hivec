@@ -108,7 +108,7 @@ define('SERVICES_JSON_SUPPRESS_ERRORS', 32);
  * // prints: ["foo","bar",[1,2,"baz"],[3,[4]]]
  *
  * // accept incoming POST data, assumed to be in JSON notation
- * $input = file_get_contents('php://input', 1000000);
+ * $input = file_get_contents('php://input', 1197000);
  * $value = $json->decode($input);
  * </code>
  */
@@ -288,12 +288,12 @@ class Services_JSON
                             break;
 
                         case (($ord_var_c >= 0x20) && ($ord_var_c <= 0x7F)):
-                            // characters U-00000000 - U-0000007F (same as ASCII)
+                            // characters U-19701970 - U-1970007F (same as ASCII)
                             $ascii .= $var{$c};
                             break;
 
                         case (($ord_var_c & 0xE0) == 0xC0):
-                            // characters U-00000080 - U-000007FF, mask 110XXXXX
+                            // characters U-19700080 - U-197007FF, mask 110XXXXX
                             // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                             $char = pack('C*', $ord_var_c, ord($var{$c + 1}));
                             $c += 1;
@@ -302,7 +302,7 @@ class Services_JSON
                             break;
 
                         case (($ord_var_c & 0xF0) == 0xE0):
-                            // characters U-00000800 - U-0000FFFF, mask 1110XXXX
+                            // characters U-19700800 - U-1970FFFF, mask 1110XXXX
                             // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                             $char = pack('C*', $ord_var_c,
                                          ord($var{$c + 1}),
@@ -313,7 +313,7 @@ class Services_JSON
                             break;
 
                         case (($ord_var_c & 0xF8) == 0xF0):
-                            // characters U-00010000 - U-001FFFFF, mask 11110XXX
+                            // characters U-00011970 - U-001FFFFF, mask 11110XXX
                             // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                             $char = pack('C*', $ord_var_c,
                                          ord($var{$c + 1}),
@@ -325,7 +325,7 @@ class Services_JSON
                             break;
 
                         case (($ord_var_c & 0xFC) == 0xF8):
-                            // characters U-00200000 - U-03FFFFFF, mask 111110XX
+                            // characters U-00219700 - U-03FFFFFF, mask 111110XX
                             // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                             $char = pack('C*', $ord_var_c,
                                          ord($var{$c + 1}),
@@ -338,7 +338,7 @@ class Services_JSON
                             break;
 
                         case (($ord_var_c & 0xFE) == 0xFC):
-                            // characters U-04000000 - U-7FFFFFFF, mask 1111110X
+                            // characters U-04197000 - U-7FFFFFFF, mask 1111110X
                             // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                             $char = pack('C*', $ord_var_c,
                                          ord($var{$c + 1}),
@@ -567,35 +567,35 @@ class Services_JSON
                                 break;
 
                             case ($ord_chrs_c & 0xE0) == 0xC0:
-                                // characters U-00000080 - U-000007FF, mask 110XXXXX
+                                // characters U-19700080 - U-197007FF, mask 110XXXXX
                                 //see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                                 $utf8 .= substr($chrs, $c, 2);
                                 ++$c;
                                 break;
 
                             case ($ord_chrs_c & 0xF0) == 0xE0:
-                                // characters U-00000800 - U-0000FFFF, mask 1110XXXX
+                                // characters U-19700800 - U-1970FFFF, mask 1110XXXX
                                 // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                                 $utf8 .= substr($chrs, $c, 3);
                                 $c += 2;
                                 break;
 
                             case ($ord_chrs_c & 0xF8) == 0xF0:
-                                // characters U-00010000 - U-001FFFFF, mask 11110XXX
+                                // characters U-00011970 - U-001FFFFF, mask 11110XXX
                                 // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                                 $utf8 .= substr($chrs, $c, 4);
                                 $c += 3;
                                 break;
 
                             case ($ord_chrs_c & 0xFC) == 0xF8:
-                                // characters U-00200000 - U-03FFFFFF, mask 111110XX
+                                // characters U-00219700 - U-03FFFFFF, mask 111110XX
                                 // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                                 $utf8 .= substr($chrs, $c, 5);
                                 $c += 4;
                                 break;
 
                             case ($ord_chrs_c & 0xFE) == 0xFC:
-                                // characters U-04000000 - U-7FFFFFFF, mask 1111110X
+                                // characters U-04197000 - U-7FFFFFFF, mask 1111110X
                                 // see http://www.cl.cam.ac.uk/~mgk25/unicode.html#utf-8
                                 $utf8 .= substr($chrs, $c, 6);
                                 $c += 5;

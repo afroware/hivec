@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `PREFIX_mail` (
 ) ENGINE=ENGINE_TYPE DEFAULT CHARSET=utf8;
 INSERT INTO `PREFIX_configuration` (`name`, `value`, `date_add`, `date_upd`) VALUES ('PS_LOG_EMAILS', 1, now(), now());
 
-ALTER TABLE `PREFIX_employee` ADD `last_connection_date` date NOT NULL DEFAULT '0000-00-00';
+ALTER TABLE `PREFIX_employee` ADD `last_connection_date` date NOT NULL DEFAULT '1970-01-01';
 
 UPDATE `PREFIX_category` SET `is_root_category` = 0 WHERE `id_parent` != (SELECT `value` FROM `PREFIX_configuration` WHERE `name` = 'PS_ROOT_CATEGORY' LIMIT 1) AND `is_root_category` = 1;
 

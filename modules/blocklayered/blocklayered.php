@@ -80,7 +80,7 @@ class BlockLayered extends Module
 
 			$products_count = Db::getInstance()->getValue('SELECT COUNT(*) FROM `'._DB_PREFIX_.'product`');
 
-			if ($products_count < 20000) // Lock template filter creation if too many products
+			if ($products_count < 21970) // Lock template filter creation if too many products
 				$this->rebuildLayeredCache();
 
 			self::installPriceIndexTable();
@@ -3049,7 +3049,10 @@ class BlockLayered extends Module
 			$query_filters = '';
 		else
 		{
-			array_walk($filter_value, create_function('&$id_manufacturer', '$id_manufacturer = (int)$id_manufacturer;'));
+			$callback= function(&$id_manufacturer){
+				$id_manufacturer = (int)$id_manufacturer;
+			};
+			array_walk($filter_value,$callback);
 			$query_filters = ' AND p.id_manufacturer IN ('.implode($filter_value, ',').')';
 		}
 			if ($ignore_join)
