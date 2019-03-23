@@ -162,7 +162,7 @@ class InstallModelInstall extends InstallAbstractModel
      */
     public function clearDatabase($truncate = false)
     {
-        foreach (Db::getInstance()->executeS('SHOW TABLES') as $row) {
+        foreach ((array)Db::getInstance()->executeS('SHOW TABLES') as $row) {
             $table = current($row);
             if (!_DB_PREFIX_ || preg_match('#^'._DB_PREFIX_.'#i', $table)) {
                 Db::getInstance()->execute((($truncate) ? 'TRUNCATE' : 'DROP TABLE').' `'.$table.'`');
@@ -523,7 +523,7 @@ class InstallModelInstall extends InstallAbstractModel
         $states = Db::getInstance()->executeS('SELECT `id_order_state` FROM '._DB_PREFIX_.'order_state ORDER by `id_order_state`');
         $states_default = Db::getInstance()->executeS('SELECT MIN(`id_configuration`), `name` FROM '._DB_PREFIX_.'configuration WHERE `name` LIKE "PS_OS_%" GROUP BY `value` ORDER BY`id_configuration`');
 
-        foreach ($states_default as &$state_default) {
+        foreach ((array)$states_default as &$state_default) {
             if (is_array($state_default) && isset($state_default['name'])) {
                 $state_default = $state_default['name'];
             }

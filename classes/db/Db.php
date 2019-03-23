@@ -566,7 +566,7 @@ abstract class DbCore
 			 return false;
 		}
         return true;
-
+	}
     /**
      * Executes a DELETE query
      *
@@ -654,21 +654,19 @@ abstract class DbCore
             }
             return $this->execute($sql, $use_cache);
         }
-		
-		if(! $this->query($sql)){
-			 throw new PrestaShopDatabaseException($sql);
-			 return false;
-		}
 
-        $this->result = true ;
+        $this->result = $this->query($sql);
 
-		if (!$array) {
-			$use_cache = false;
-			$result = $this->result;
-		} else {
-			$result = $this->getAll($this->result);
-		}
-
+        if (!$this->result) {
+            $result = false;
+        } else {
+            if (!$array) {
+                $use_cache = false;
+                $result = $this->result;
+            } else {
+                $result = $this->getAll($this->result);
+            }
+        }
 
         $this->last_cached = false;
         if ($use_cache && $this->is_cache_enabled && $array) {
