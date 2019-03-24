@@ -3309,7 +3309,7 @@ exit;
         if ((isset($_SERVER['HTTP_MOD_REWRITE']) && Tools::strtolower($_SERVER['HTTP_MOD_REWRITE']) == 'on') || Tools::strtolower(getenv('HTTP_MOD_REWRITE')) == 'on') {
             return true;
         }
-        return false;
+        return true;
     }
 
     public static function unSerialize($serialized, $object = false)

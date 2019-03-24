@@ -519,9 +519,9 @@ class InstallModelInstall extends InstallAbstractModel
                 }
             }
         }
-
+		
         $states = Db::getInstance()->executeS('SELECT `id_order_state` FROM '._DB_PREFIX_.'order_state ORDER by `id_order_state`');
-        $states_default = Db::getInstance()->executeS('SELECT MIN(`id_configuration`), `name` FROM '._DB_PREFIX_.'configuration WHERE `name` LIKE "PS_OS_%" GROUP BY `value` ORDER BY`id_configuration`');
+        $states_default = Db::getInstance()->executeS('SELECT MIN(`id_configuration`) `id`, `name` FROM '._DB_PREFIX_.'configuration WHERE `name` LIKE "PS_OS_%" GROUP BY `name` ORDER BY`id`');
 
         foreach ((array)$states_default as &$state_default) {
             if (is_array($state_default) && isset($state_default['name'])) {
@@ -538,7 +538,7 @@ class InstallModelInstall extends InstallAbstractModel
             /* deprecated order state */
             Configuration::updateGlobalValue('PS_OS_OUTOFSTOCK_PAID', (int) Configuration::get('PS_OS_OUTOFSTOCK'));
         }
-
+		
         // Set logo configuration
         if (file_exists(_PS_IMG_DIR_.'logo.png')) {
             list($width, $height) = getimagesize(_PS_IMG_DIR_.'logo.png');
